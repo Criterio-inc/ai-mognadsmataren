@@ -5,13 +5,13 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
 
-// Allowed email domain for Curago consultants
-const ALLOWED_DOMAIN = 'curago.se';
+// Allowed email domains for consultants
+const ALLOWED_DOMAINS = ['curago.se', 'criteroconsulting.se'];
 
 // Check if email is from allowed domain
 export function isEmailAllowed(email: string): boolean {
   const domain = email.split('@')[1]?.toLowerCase();
-  return domain === ALLOWED_DOMAIN;
+  return ALLOWED_DOMAINS.includes(domain);
 }
 
 // Sign up with email and password
@@ -22,7 +22,7 @@ export async function signUp(
   if (!isEmailAllowed(email)) {
     return {
       success: false,
-      error: `Endast e-postadresser med @${ALLOWED_DOMAIN} kan registrera sig.`,
+      error: `Endast e-postadresser med @curago.se eller @criteroconsulting.se kan registrera sig.`,
     };
   }
 
@@ -52,7 +52,7 @@ export async function signIn(
   if (!isEmailAllowed(email)) {
     return {
       success: false,
-      error: `Endast e-postadresser med @${ALLOWED_DOMAIN} kan logga in.`,
+      error: `Endast e-postadresser med @curago.se eller @criteroconsulting.se kan logga in.`,
     };
   }
 
