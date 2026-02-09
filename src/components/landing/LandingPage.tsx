@@ -40,26 +40,22 @@ export function LandingPage({ onStart }: LandingPageProps) {
     <div className="min-h-screen bg-background">
       {/* Hero section */}
       <div className="max-w-6xl mx-auto px-4 pt-4 pb-24">
-        {/* Orange icon logo at top */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex justify-center mb-12"
-        >
-          <Image
-            src="/critero-icon.svg"
-            alt="Critero"
-            width={120}
-            height={72}
-            className="h-16 w-auto"
-          />
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
+          {/* AI Mognadsmätaren logo */}
+          <div className="flex justify-center mb-8">
+            <Image
+              src="/aimognad-logo.png"
+              alt="AI-Mognadsmätaren"
+              width={160}
+              height={160}
+              className="w-28 h-28 md:w-40 md:h-40 drop-shadow-lg"
+              priority
+            />
+          </div>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             {locale === 'sv' ? 'AI-Mognadsmätaren' : 'AI Maturity Meter'}
           </h1>
