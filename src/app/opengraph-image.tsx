@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
-
-export const runtime = 'edge';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export const alt = 'AI-Mognadsmätaren - Mät er organisations AI-mognad';
 export const size = {
@@ -10,6 +10,9 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
+  const logoData = await readFile(join(process.cwd(), 'public', 'aimognad-logo.png'));
+  const logoBase64 = `data:image/png;base64,${logoData.toString('base64')}`;
+
   return new ImageResponse(
     (
       <div
@@ -20,29 +23,17 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#c96442',
+          backgroundColor: '#2d4a2d',
           padding: '60px',
         }}
       >
-        {/* Graph icon */}
-        <svg
-          width="200"
-          height="120"
-          viewBox="0 0 100 60"
-          fill="none"
-          style={{ marginBottom: '40px' }}
-        >
-          <circle cx="10" cy="45" r="8" fill="#F5A623" />
-          <circle cx="30" cy="28" r="8" fill="#F5A623" />
-          <circle cx="50" cy="35" r="8" fill="#F5A623" />
-          <circle cx="70" cy="18" r="8" fill="#F5A623" />
-          <circle cx="90" cy="10" r="8" fill="#F5A623" />
-
-          <line x1="10" y1="45" x2="30" y2="28" stroke="#F5A623" strokeWidth="5" strokeLinecap="round" />
-          <line x1="30" y1="28" x2="50" y2="35" stroke="#F5A623" strokeWidth="5" strokeLinecap="round" />
-          <line x1="50" y1="35" x2="70" y2="18" stroke="#F5A623" strokeWidth="5" strokeLinecap="round" />
-          <line x1="70" y1="18" x2="90" y2="10" stroke="#F5A623" strokeWidth="5" strokeLinecap="round" />
-        </svg>
+        {/* Logo */}
+        <img
+          src={logoBase64}
+          width="180"
+          height="180"
+          style={{ marginBottom: '30px' }}
+        />
 
         {/* Main title */}
         <div
