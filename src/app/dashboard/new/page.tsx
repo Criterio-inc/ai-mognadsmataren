@@ -57,17 +57,17 @@ export default function NewProjectPage() {
     <div className="max-w-2xl mx-auto">
       <Link
         href="/dashboard"
-        className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 mb-6"
+        className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200 mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         {t.backToProjects}
       </Link>
 
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+      <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-8">
+        <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-2">
           {t.createNewProject}
         </h1>
-        <p className="text-slate-500 dark:text-slate-400 mb-8">
+        <p className="text-stone-500 dark:text-stone-400 mb-8">
           {t.createDescription}
         </p>
 
@@ -79,7 +79,7 @@ export default function NewProjectPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
               <FileText className="w-4 h-4" />
               {t.projectName}
             </label>
@@ -89,12 +89,12 @@ export default function NewProjectPage() {
               placeholder={t.projectNamePlaceholder}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+              className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
             />
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
               <Building2 className="w-4 h-4" />
               {t.clientCompany}
             </label>
@@ -104,17 +104,17 @@ export default function NewProjectPage() {
               placeholder={t.clientCompanyPlaceholder}
               value={formData.clientName}
               onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+              className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
             />
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
               <Globe className="w-4 h-4" />
               {t.clientEmailDomain}
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">@</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">@</span>
               <input
                 type="text"
                 required
@@ -123,16 +123,16 @@ export default function NewProjectPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, clientDomain: e.target.value.replace('@', '') })
                 }
-                className="w-full pl-8 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+                className="w-full pl-8 pr-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
               />
             </div>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
               {domainHint}
             </p>
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
               <Calendar className="w-4 h-4" />
               {t.deadline}
             </label>
@@ -140,9 +140,9 @@ export default function NewProjectPage() {
               type="datetime-local"
               value={formData.deadline}
               onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+              className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
             />
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
               {t.deadlineDescription}
             </p>
           </div>
@@ -150,14 +150,14 @@ export default function NewProjectPage() {
           <div className="flex gap-4 pt-4">
             <Link
               href="/dashboard"
-              className="flex-1 px-4 py-3 text-center text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+              className="flex-1 px-4 py-3 text-center text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-700 rounded-lg hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors"
             >
               {tCommon.cancel}
             </Link>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 px-4 py-3 bg-primary text-white rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isSubmitting ? tDashboard.creating : tDashboard.createProject}
             </button>

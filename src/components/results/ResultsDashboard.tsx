@@ -61,7 +61,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-slate-900 dark:to-teal-900/20 pt-4 pb-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-900/20 pt-4 pb-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -69,10 +69,10 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-2">
             {locale === 'sv' ? 'Ert AI-mognadsresultat' : 'Your AI maturity results'}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-stone-600 dark:text-stone-400">
             {locale === 'sv'
               ? 'AI-mognadsbedömning baserad på 8 strategiska dimensioner'
               : 'AI maturity assessment based on 8 strategic dimensions'}
@@ -86,9 +86,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
               {locale === 'sv' ? 'Övergripande AI-mognadsnivå' : 'Overall AI maturity level'}
             </h2>
             <MaturityGauge score={overallScore} locale={locale} />
@@ -99,9 +99,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
               {locale === 'sv' ? 'Dimensionsanalys' : 'Dimension analysis'}
             </h2>
             <div className="flex justify-center">
@@ -115,12 +115,12 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
+          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
         >
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 text-center">
+          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
             {locale === 'sv' ? 'AI-mognadsresan' : 'AI maturity journey'}
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-4 text-sm">
+          <p className="text-stone-500 dark:text-stone-400 text-center mb-4 text-sm">
             {locale === 'sv'
               ? '"AI-mognad är inte en teknikfråga – det är en ledningsfråga"'
               : '"AI maturity is not a technology question – it\'s a leadership question"'}
@@ -133,9 +133,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
+          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
         >
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
             {locale === 'sv' ? 'Dimensioner i detalj' : 'Dimensions in detail'}
           </h2>
           <DimensionBars scores={dimensionScores} locale={locale} />
@@ -164,14 +164,14 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
         >
           <button
             onClick={onReset}
-            className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-200 rounded-lg hover:bg-stone-300 dark:hover:bg-stone-600 transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             {locale === 'sv' ? 'Gör om bedömningen' : 'Retake assessment'}
           </button>
 
           <button
-            className="flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:opacity-90 transition-colors"
             onClick={() => {
               alert(locale === 'sv' ? 'PDF-export kommer snart!' : 'PDF export coming soon!');
             }}

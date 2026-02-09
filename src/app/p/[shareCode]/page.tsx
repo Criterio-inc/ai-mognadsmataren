@@ -146,7 +146,7 @@ export default function SurveyPage() {
   const LanguageToggle = () => (
     <button
       onClick={() => setLocale(locale === 'sv' ? 'en' : 'sv')}
-      className="fixed top-4 right-4 z-50 inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition-colors"
+      className="fixed top-4 right-4 z-50 inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-white/80 dark:bg-stone-800/80 backdrop-blur rounded-lg border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-white dark:hover:bg-stone-800 transition-colors"
     >
       <Globe className="w-4 h-4" />
       {locale === 'sv' ? 'EN' : 'SV'}
@@ -155,7 +155,7 @@ export default function SurveyPage() {
 
   // Header text component
   const HeaderText = ({ className = '' }: { className?: string }) => (
-    <span className={`font-bold ${className}`} style={{ color: '#1a5f5a' }}>
+    <span className={`font-bold ${className}`} style={{ color: '#c96442' }}>
       {locale === 'sv' ? 'AI-Mognadsmätaren' : 'AI Maturity Meter'}
     </span>
   );
@@ -163,22 +163,22 @@ export default function SurveyPage() {
   // Render different steps
   if (step === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
-        <div className="animate-pulse text-slate-400">{t.loadingSurvey}</div>
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center">
+        <div className="animate-pulse text-stone-400">{t.loadingSurvey}</div>
       </div>
     );
   }
 
   if (step === 'error') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center px-4">
         <LanguageToggle />
         <div className="text-center">
           <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-2">
             {t.surveyNotFound}
           </h1>
-          <p className="text-slate-500 dark:text-slate-400">{errorMessage}</p>
+          <p className="text-stone-500 dark:text-stone-400">{errorMessage}</p>
         </div>
       </div>
     );
@@ -186,16 +186,16 @@ export default function SurveyPage() {
 
   if (step === 'closed') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center px-4">
         <LanguageToggle />
         <div className="text-center max-w-md">
-          <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-            <AlertCircle className="w-8 h-8 text-slate-400" />
+          <div className="w-16 h-16 bg-stone-100 dark:bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-4">
+            <AlertCircle className="w-8 h-8 text-stone-400" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-2">
             {t.surveyClosed}
           </h1>
-          <p className="text-slate-500 dark:text-slate-400">
+          <p className="text-stone-500 dark:text-stone-400">
             {project?.name
               ? (locale === 'sv'
                   ? `Enkäten "${project.name}" är inte längre öppen för svar.`
@@ -209,7 +209,7 @@ export default function SurveyPage() {
 
   if (step === 'completed') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -218,10 +218,10 @@ export default function SurveyPage() {
           <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <Check className="w-10 h-10 text-green-600 dark:text-green-400" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+          <h1 className="text-3xl font-bold text-stone-900 dark:text-white mb-4">
             {t.thankYou}
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 mb-8">
+          <p className="text-stone-500 dark:text-stone-400 mb-8">
             {t.responsesRecorded}
           </p>
           <div className="flex justify-center">
@@ -234,7 +234,7 @@ export default function SurveyPage() {
 
   if (step === 'email') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center px-4">
         <LanguageToggle />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -245,11 +245,11 @@ export default function SurveyPage() {
             <HeaderText className="text-2xl" />
           </div>
 
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-2xl p-8 shadow-xl">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 text-center">
+          <div className="bg-white/80 dark:bg-stone-800/80 backdrop-blur rounded-2xl p-8 shadow-xl">
+            <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-2 text-center">
               {project?.name}
             </h1>
-            <p className="text-slate-500 dark:text-slate-400 text-center mb-8">
+            <p className="text-stone-500 dark:text-stone-400 text-center mb-8">
               {t.digitalMaturityFor} {project?.clientName}
             </p>
 
@@ -261,7 +261,7 @@ export default function SurveyPage() {
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
                   <Mail className="w-4 h-4" />
                   {t.yourEmail}
                 </label>
@@ -271,9 +271,9 @@ export default function SurveyPage() {
                   placeholder={`${locale === 'sv' ? 'namn' : 'name'}@${project?.clientDomain}`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
                 />
-                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
                   {locale === 'sv'
                     ? `Endast @${project?.clientDomain} kan delta`
                     : `Only @${project?.clientDomain} can participate`}
@@ -281,7 +281,7 @@ export default function SurveyPage() {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
                   <User className="w-4 h-4" />
                   {t.yourName}
                 </label>
@@ -290,21 +290,21 @@ export default function SurveyPage() {
                   placeholder={t.namePlaceholder}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
               >
                 {isSubmitting ? t.starting : t.startSurvey}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </form>
 
-            <p className="mt-6 text-xs text-slate-400 text-center">
+            <p className="mt-6 text-xs text-stone-400 text-center">
               {t.surveyDuration}
             </p>
           </div>
@@ -315,20 +315,20 @@ export default function SurveyPage() {
 
   // Assessment step
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900">
       <LanguageToggle />
       {/* Back to start link */}
       <a
         href="/"
-        className="fixed top-4 left-4 z-50 inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition-colors"
+        className="fixed top-4 left-4 z-50 inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-white/80 dark:bg-stone-800/80 backdrop-blur rounded-lg border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-white dark:hover:bg-stone-800 transition-colors"
       >
         <Home className="w-4 h-4" />
         {locale === 'sv' ? 'Startsida' : 'Home'}
       </a>
       {/* Progress bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-slate-200 dark:bg-slate-700 z-50">
+      <div className="fixed top-0 left-0 right-0 h-1 bg-stone-200 dark:bg-stone-700 z-50">
         <motion.div
-          className="h-full bg-gradient-to-r from-teal-600 to-emerald-600"
+          className="h-full bg-primary"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.3 }}
@@ -339,14 +339,14 @@ export default function SurveyPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <HeaderText className="text-sm opacity-70" />
-          <span className="text-sm text-slate-500 dark:text-slate-400">
+          <span className="text-sm text-stone-500 dark:text-stone-400">
             {t.question} {currentQuestionIndex + 1} {t.of} {questions.length}
           </span>
         </div>
 
         {/* Dimension indicator */}
         <div className="mb-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-sm font-medium rounded-full">
+          <span className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-sm font-medium rounded-full">
             {currentDimension?.[locale].name}
           </span>
         </div>
@@ -359,9 +359,9 @@ export default function SurveyPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
-            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-2xl p-8 shadow-xl mb-8"
+            className="bg-white/80 dark:bg-stone-800/80 backdrop-blur rounded-2xl p-8 shadow-xl mb-8"
           >
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-stone-900 dark:text-white mb-8">
               {currentQuestion?.[locale]}
             </h2>
 
@@ -373,15 +373,15 @@ export default function SurveyPage() {
                   onClick={() => saveResponse(currentQuestion.id, option.value)}
                   className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
                     responses[currentQuestion.id] === option.value
-                      ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
-                      : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
+                      ? 'border-amber-600 bg-orange-50 dark:bg-orange-900/20'
+                      : 'border-stone-200 dark:border-stone-700 hover:border-stone-300 dark:hover:border-stone-600'
                   }`}
                 >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
                       responses[currentQuestion.id] === option.value
-                        ? 'bg-teal-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                        ? 'bg-amber-600 text-white'
+                        : 'bg-stone-100 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
                     }`}
                   >
                     {option.value}
@@ -389,8 +389,8 @@ export default function SurveyPage() {
                   <span
                     className={`text-left ${
                       responses[currentQuestion.id] === option.value
-                        ? 'text-teal-700 dark:text-teal-300 font-medium'
-                        : 'text-slate-600 dark:text-slate-300'
+                        ? 'text-amber-700 dark:text-amber-300 font-medium'
+                        : 'text-stone-600 dark:text-stone-300'
                     }`}
                   >
                     {option.label}
@@ -406,7 +406,7 @@ export default function SurveyPage() {
           <button
             onClick={goPrev}
             disabled={currentQuestionIndex === 0}
-            className="flex items-center gap-2 px-4 py-2 text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-stone-600 dark:text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:text-stone-900 dark:hover:text-white transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             {t.previous}
@@ -425,7 +425,7 @@ export default function SurveyPage() {
             <button
               onClick={goNext}
               disabled={!responses[currentQuestion?.id]}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.next}
               <ArrowRight className="w-5 h-5" />

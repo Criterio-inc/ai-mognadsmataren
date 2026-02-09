@@ -49,14 +49,14 @@ export function Assessment({ onComplete }: AssessmentProps) {
   }, [currentQuestionIndex, setCurrentQuestionIndex]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-slate-900 dark:to-teal-900/20 pt-4 pb-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-900/20 pt-4 pb-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-stone-900 dark:text-white mb-2">
             {locale === 'sv' ? 'AI-Mognadsmätning' : 'AI Maturity Assessment'}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-stone-600 dark:text-stone-400">
             {locale === 'sv'
               ? 'Svara på frågorna för att bedöma er AI-mognad'
               : 'Answer the questions to assess your AI maturity'}
@@ -67,7 +67,7 @@ export function Assessment({ onComplete }: AssessmentProps) {
         <ProgressBar />
 
         {/* Question */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8">
+        <div className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8">
           <AnimatePresence mode="wait">
             <QuestionCard
               key={currentQuestion.id}
@@ -83,7 +83,7 @@ export function Assessment({ onComplete }: AssessmentProps) {
         </div>
 
         {/* Tips */}
-        <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        <div className="mt-6 text-center text-sm text-stone-500 dark:text-stone-400">
           <p>
             {locale === 'sv'
               ? '💡 Tips: Svara utifrån hur det faktiskt ser ut idag, inte hur ni vill att det ska vara'

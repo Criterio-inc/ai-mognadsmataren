@@ -89,7 +89,7 @@ export default function DashboardPage() {
   }
 
   const statusColors = {
-    draft: 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300',
+    draft: 'bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300',
     active: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
     closed: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
   };
@@ -103,7 +103,7 @@ export default function DashboardPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-pulse text-slate-400">{t.loadingProjects}</div>
+        <div className="animate-pulse text-stone-400">{t.loadingProjects}</div>
       </div>
     );
   }
@@ -113,10 +113,10 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-2xl font-bold text-stone-900 dark:text-white">
             {t.myProjects}
           </h1>
-          <p className="text-slate-500 dark:text-slate-400">
+          <p className="text-stone-500 dark:text-stone-400">
             {t.manageProjects}
           </p>
         </div>
@@ -124,14 +124,14 @@ export default function DashboardPage() {
           <button
             onClick={createDemoProject}
             disabled={isCreatingDemo}
-            className="inline-flex items-center gap-2 px-3 py-2 text-sm text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-3 py-2 text-sm text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-700 rounded-lg hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors disabled:opacity-50"
           >
             <Sparkles className="w-4 h-4" />
             {isCreatingDemo ? t.creating : t.demoProject}
           </button>
           <Link
             href="/dashboard/new"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-colors"
           >
             <Plus className="w-5 h-5" />
             {t.newProject}
@@ -141,19 +141,19 @@ export default function DashboardPage() {
 
       {/* Projects grid */}
       {projects.length === 0 ? (
-        <div className="text-center py-16 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-          <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
-            <Users className="w-8 h-8 text-slate-400" />
+        <div className="text-center py-16 bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700">
+          <div className="w-16 h-16 mx-auto mb-4 bg-stone-100 dark:bg-stone-700 rounded-full flex items-center justify-center">
+            <Users className="w-8 h-8 text-stone-400" />
           </div>
-          <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+          <h3 className="text-lg font-medium text-stone-900 dark:text-white mb-2">
             {t.noProjectsYet}
           </h3>
-          <p className="text-slate-500 dark:text-slate-400 mb-6">
+          <p className="text-stone-500 dark:text-stone-400 mb-6">
             {t.createFirstProject}
           </p>
           <Link
             href="/dashboard/new"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-colors"
           >
             <Plus className="w-5 h-5" />
             {t.createProject}
@@ -164,17 +164,17 @@ export default function DashboardPage() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <Link
                     href={`/dashboard/project/${project.id}`}
-                    className="font-semibold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400"
+                    className="font-semibold text-stone-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     {project.name}
                   </Link>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-stone-500 dark:text-stone-400">
                     {project.clientName}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function DashboardPage() {
               </div>
 
               <div className="space-y-2 mb-4">
-                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-300">
                   <Users className="w-4 h-4" />
                   <span>{project.responseCount} {t.responses}</span>
                 </div>
@@ -195,7 +195,7 @@ export default function DashboardPage() {
                     className={`flex items-center gap-2 text-sm ${
                       isDeadlinePassed(project.deadline)
                         ? 'text-red-600 dark:text-red-400'
-                        : 'text-slate-600 dark:text-slate-300'
+                        : 'text-stone-600 dark:text-stone-300'
                     }`}
                   >
                     <Calendar className="w-4 h-4" />
@@ -207,17 +207,17 @@ export default function DashboardPage() {
                 )}
               </div>
 
-              <div className="flex items-center gap-2 pt-4 border-t border-slate-100 dark:border-slate-700">
+              <div className="flex items-center gap-2 pt-4 border-t border-stone-100 dark:border-stone-700">
                 <button
                   onClick={() => copyShareLink(project.shareCode)}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-700 rounded-lg hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors"
                 >
                   <LinkIcon className="w-4 h-4" />
                   {t.copyLink}
                 </button>
                 <Link
                   href={`/dashboard/project/${project.id}`}
-                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm text-white bg-primary rounded-lg hover:opacity-90 transition-colors"
                 >
                   {t.viewResults}
                 </Link>
@@ -226,12 +226,12 @@ export default function DashboardPage() {
                     onClick={() =>
                       setDeleteConfirm(deleteConfirm === project.id ? null : project.id)
                     }
-                    className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                    className="p-2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 transition-colors"
                   >
                     <MoreVertical className="w-4 h-4" />
                   </button>
                   {deleteConfirm === project.id && (
-                    <div className="absolute right-0 top-full mt-1 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-10">
+                    <div className="absolute right-0 top-full mt-1 w-40 bg-white dark:bg-stone-800 rounded-lg shadow-lg border border-stone-200 dark:border-stone-700 py-1 z-10">
                       <button
                         onClick={() => handleDelete(project.id)}
                         className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"

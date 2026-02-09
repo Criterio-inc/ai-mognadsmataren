@@ -9,13 +9,13 @@ interface DimensionBarsProps {
 }
 
 const barColors = [
-  'from-teal-400 to-teal-600',
-  'from-emerald-400 to-emerald-600',
-  'from-cyan-400 to-cyan-600',
-  'from-sky-400 to-sky-600',
+  'from-amber-500 to-amber-700',
   'from-orange-400 to-orange-600',
-  'from-amber-400 to-amber-600',
-  'from-indigo-400 to-indigo-600',
+  'from-yellow-500 to-yellow-700',
+  'from-lime-500 to-lime-700',
+  'from-rose-400 to-rose-600',
+  'from-amber-600 to-amber-800',
+  'from-emerald-500 to-emerald-700',
   'from-violet-400 to-violet-600',
 ];
 
@@ -36,23 +36,23 @@ export function DimensionBars({ scores, locale }: DimensionBarsProps) {
             {/* Header */}
             <div className="flex justify-between items-baseline mb-2">
               <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
+                <h4 className="font-medium text-stone-900 dark:text-white">
                   {dim[locale].name}
                 </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-stone-500 dark:text-stone-400">
                   {dim[locale].description}
                 </p>
               </div>
               <div className="text-right">
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                <span className="text-2xl font-bold text-stone-900 dark:text-white">
                   {score.toFixed(1)}
                 </span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">/5</span>
+                <span className="text-sm text-stone-500 dark:text-stone-400">/5</span>
               </div>
             </div>
 
             {/* Bar */}
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-4 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
               <motion.div
                 className={`h-full bg-gradient-to-r ${barColors[index]} rounded-full`}
                 initial={{ width: 0 }}
@@ -68,8 +68,8 @@ export function DimensionBars({ scores, locale }: DimensionBarsProps) {
                   key={n}
                   className={`text-xs ${
                     score >= n
-                      ? 'text-gray-600 dark:text-gray-400'
-                      : 'text-gray-300 dark:text-gray-600'
+                      ? 'text-stone-600 dark:text-stone-400'
+                      : 'text-stone-300 dark:text-stone-600'
                   }`}
                 >
                   {n}

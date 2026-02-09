@@ -129,7 +129,7 @@ export default function ProjectReportPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-pulse text-slate-400">{t.loadingReport}</div>
+        <div className="animate-pulse text-stone-400">{t.loadingReport}</div>
       </div>
     );
   }
@@ -137,8 +137,8 @@ export default function ProjectReportPage() {
   if (!data) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-500">{projectNotFound}</p>
-        <Link href="/dashboard" className="text-teal-600 hover:underline mt-2 inline-block">
+        <p className="text-stone-500">{projectNotFound}</p>
+        <Link href="/dashboard" className="text-amber-600 hover:underline mt-2 inline-block">
           {backToDashboard}
         </Link>
       </div>
@@ -153,18 +153,18 @@ export default function ProjectReportPage() {
       <div>
         <Link
           href={`/dashboard/project/${params.id}`}
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 mb-6"
+          className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200 mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           {tProjectDetail.backToProjects}
         </Link>
 
-        <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-          <Users className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-          <p className="text-slate-500 dark:text-slate-400 text-lg font-medium mb-2">
+        <div className="text-center py-12 bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700">
+          <Users className="w-12 h-12 text-stone-300 dark:text-stone-600 mx-auto mb-4" />
+          <p className="text-stone-500 dark:text-stone-400 text-lg font-medium mb-2">
             {t.noCompletedResponses}
           </p>
-          <p className="text-slate-400 dark:text-slate-500">
+          <p className="text-stone-400 dark:text-stone-500">
             {t.reportShownWhen}
           </p>
         </div>
@@ -215,7 +215,7 @@ export default function ProjectReportPage() {
         <div className="flex items-center justify-between mb-6">
           <Link
             href={`/dashboard/project/${params.id}`}
-            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+            className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200"
           >
             <ArrowLeft className="w-4 h-4" />
             {tProjectDetail.backToProjects}
@@ -223,7 +223,7 @@ export default function ProjectReportPage() {
 
           <button
             onClick={handleExportPDF}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-colors"
           >
             <Download className="w-4 h-4" />
             {t.exportPdf}
@@ -233,33 +233,33 @@ export default function ProjectReportPage() {
 
       <div id="report-content" ref={reportRef}>
         {/* Report Header */}
-        <div className="bg-gradient-to-br from-slate-50 to-teal-50 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 mb-8">
+        <div className="bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-800 rounded-2xl p-8 mb-8">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-stone-900 dark:text-white mb-2">
               {t.maturityReport}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-stone-600 dark:text-stone-400">
               {t.reportDescription}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <div className="text-center">
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t.project}</p>
-              <p className="font-semibold text-slate-900 dark:text-white">{project.name}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{t.project}</p>
+              <p className="font-semibold text-stone-900 dark:text-white">{project.name}</p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t.client}</p>
-              <p className="font-semibold text-slate-900 dark:text-white">{project.clientName}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{t.client}</p>
+              <p className="font-semibold text-stone-900 dark:text-white">{project.clientName}</p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t.responseCount}</p>
-              <p className="font-semibold text-slate-900 dark:text-white">{completedSessions.length}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{t.responseCount}</p>
+              <p className="font-semibold text-stone-900 dark:text-white">{completedSessions.length}</p>
             </div>
           </div>
 
           {project.deadline && (
-            <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
+            <p className="text-center text-sm text-stone-500 dark:text-stone-400 mt-4">
               <Calendar className="w-4 h-4 inline mr-1" />
               {collectionEnded}
             </p>
@@ -272,9 +272,9 @@ export default function ProjectReportPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
               {t.overallMaturityLevel}
             </h2>
             <MaturityGauge score={aggregatedScores.overallScore} locale={locale} />
@@ -284,9 +284,9 @@ export default function ProjectReportPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
               {t.dimensionAnalysis}
             </h2>
             <div className="flex justify-center">
@@ -300,12 +300,12 @@ export default function ProjectReportPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
+          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
         >
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 text-center">
+          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
             {t.maturityJourney}
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-4 text-sm">
+          <p className="text-stone-500 dark:text-stone-400 text-center mb-4 text-sm">
             {quote}
           </p>
           <MaturitySteps currentLevel={maturityLevel} locale={locale} />
@@ -316,9 +316,9 @@ export default function ProjectReportPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
+          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
         >
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
             {t.dimensionsInDetail}
           </h2>
           <DimensionBars scores={aggregatedScores.dimensionScores} locale={locale} />
@@ -339,7 +339,7 @@ export default function ProjectReportPage() {
         </motion.div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-slate-400 dark:text-slate-500 py-4 border-t border-slate-200 dark:border-slate-700">
+        <div className="text-center text-sm text-stone-400 dark:text-stone-500 py-4 border-t border-stone-200 dark:border-stone-700">
           <p>{t.generatedBy}</p>
           <p>{new Date().toLocaleDateString(locale === 'sv' ? 'sv-SE' : 'en-US')}</p>
         </div>
