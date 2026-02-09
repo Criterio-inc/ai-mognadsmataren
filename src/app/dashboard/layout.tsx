@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
 import { SignOutButton } from './SignOutButton';
 
 export default async function DashboardLayout({
@@ -33,6 +34,14 @@ export default async function DashboardLayout({
                   className="text-sm font-medium text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-white"
                 >
                   Projekt
+                </Link>
+                <Link
+                  href="/dashboard/guide"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-white transition-colors"
+                  title="Konsultguide"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Konsultguide
                 </Link>
               </nav>
             </div>
