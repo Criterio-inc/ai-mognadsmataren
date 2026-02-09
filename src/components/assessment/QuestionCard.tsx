@@ -58,18 +58,18 @@ export function QuestionCard({
     >
       {/* Dimension badge */}
       <div className="mb-4">
-        <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200">
+        <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
           {dimension?.[locale].name}
         </span>
       </div>
 
       {/* Question counter */}
-      <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+      <div className="text-sm text-stone-500 dark:text-stone-400 mb-2">
         {locale === 'sv' ? 'Fråga' : 'Question'} {questionNumber} {locale === 'sv' ? 'av' : 'of'} {totalQuestions}
       </div>
 
       {/* Question text */}
-      <h2 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+      <h2 className="text-xl md:text-2xl font-semibold text-stone-900 dark:text-white mb-8">
         {question[locale]}
       </h2>
 
@@ -83,16 +83,16 @@ export function QuestionCard({
             onClick={() => handleSelect(value)}
             className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
               currentValue === value
-                ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30'
-                : 'border-gray-200 dark:border-gray-700 hover:border-teal-300 dark:hover:border-teal-600'
+                ? 'border-amber-600 bg-orange-50 dark:bg-orange-900/30'
+                : 'border-stone-200 dark:border-stone-700 hover:border-amber-400 dark:hover:border-amber-600'
             }`}
           >
             <div className="flex items-center gap-4">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                   currentValue === value
-                    ? 'bg-teal-500 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-stone-200 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
                 }`}
               >
                 {value}
@@ -100,8 +100,8 @@ export function QuestionCard({
               <span
                 className={`text-sm md:text-base ${
                   currentValue === value
-                    ? 'text-teal-700 dark:text-teal-300 font-medium'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? 'text-amber-800 dark:text-amber-300 font-medium'
+                    : 'text-stone-700 dark:text-stone-300'
                 }`}
               >
                 {scaleLabels[locale][value - 1]}
@@ -118,8 +118,8 @@ export function QuestionCard({
           disabled={isFirst}
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
             isFirst
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
+              ? 'bg-stone-100 text-stone-400 cursor-not-allowed dark:bg-stone-800'
+              : 'bg-stone-200 text-stone-700 hover:bg-stone-300 dark:bg-stone-700 dark:text-stone-200 dark:hover:bg-stone-600'
           }`}
         >
           {locale === 'sv' ? '← Föregående' : '← Previous'}
@@ -130,8 +130,8 @@ export function QuestionCard({
           disabled={currentValue === undefined}
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
             currentValue === undefined
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800'
-              : 'bg-teal-600 text-white hover:bg-teal-700'
+              ? 'bg-stone-100 text-stone-400 cursor-not-allowed dark:bg-stone-800'
+              : 'bg-primary text-white hover:opacity-90'
           }`}
         >
           {isLast

@@ -13,9 +13,9 @@ const levelIcons = [Search, FlaskConical, FileCheck, Scaling, Sparkles];
 const levelColors = [
   'from-red-400 to-red-500',
   'from-orange-400 to-orange-500',
-  'from-yellow-400 to-yellow-500',
-  'from-teal-400 to-teal-500',
-  'from-teal-600 to-teal-700',
+  'from-amber-400 to-amber-500',
+  'from-yellow-600 to-amber-600',
+  'from-lime-500 to-green-600',
 ];
 
 export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
@@ -26,7 +26,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
         {/* Connection line */}
         <div className="absolute top-8 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-700" />
         <motion.div
-          className="absolute top-8 left-0 h-1 bg-gradient-to-r from-teal-500 to-teal-600"
+          className="absolute top-8 left-0 h-1 bg-gradient-to-r from-amber-500 to-amber-600"
           initial={{ width: 0 }}
           animate={{ width: `${((currentLevel - 1) / 4) * 100}%` }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -53,7 +53,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
                     isCurrent
                       ? `bg-gradient-to-br ${levelColors[index]} shadow-lg`
                       : isActive
-                        ? 'bg-teal-500'
+                        ? 'bg-amber-600'
                         : 'bg-gray-300 dark:bg-gray-600'
                   }`}
                   animate={isCurrent ? { scale: [1, 1.1, 1] } : {}}
@@ -62,7 +62,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
                   <Icon className={`w-7 h-7 ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-400'}`} />
                   {isCurrent && (
                     <motion.div
-                      className="absolute inset-0 rounded-full border-4 border-teal-400"
+                      className="absolute inset-0 rounded-full border-4 border-amber-400"
                       animate={{ scale: [1, 1.3], opacity: [1, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     />
@@ -72,7 +72,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
                 {/* Level number */}
                 <div className={`mt-2 text-sm font-bold ${
                   isCurrent
-                    ? 'text-teal-600 dark:text-teal-400'
+                    ? 'text-amber-700 dark:text-amber-400'
                     : isActive
                       ? 'text-gray-700 dark:text-gray-300'
                       : 'text-gray-400 dark:text-gray-500'
@@ -83,7 +83,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
                 {/* Level name */}
                 <div className={`mt-1 text-xs text-center max-w-[80px] ${
                   isCurrent
-                    ? 'text-teal-600 dark:text-teal-400 font-medium'
+                    ? 'text-amber-700 dark:text-amber-400 font-medium'
                     : isActive
                       ? 'text-gray-600 dark:text-gray-400'
                       : 'text-gray-400 dark:text-gray-500'
@@ -98,7 +98,7 @@ export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
 
       {/* Current level description */}
       <motion.div
-        className="mt-12 p-6 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-xl"
+        className="mt-12 p-6 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}

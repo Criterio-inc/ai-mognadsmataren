@@ -140,7 +140,7 @@ export default function ProjectDetailPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-pulse text-slate-400">{tDashboard.loadingProjects}</div>
+        <div className="animate-pulse text-stone-400">{tDashboard.loadingProjects}</div>
       </div>
     );
   }
@@ -148,8 +148,8 @@ export default function ProjectDetailPage() {
   if (!data) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-500">{projectNotFound}</p>
-        <Link href="/dashboard" className="text-teal-600 hover:underline mt-2 inline-block">
+        <p className="text-stone-500">{projectNotFound}</p>
+        <Link href="/dashboard" className="text-amber-600 hover:underline mt-2 inline-block">
           {backToDashboard}
         </Link>
       </div>
@@ -169,7 +169,7 @@ export default function ProjectDetailPage() {
     <div>
       <Link
         href="/dashboard"
-        className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 mb-6"
+        className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200 mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         {t.backToProjects}
@@ -179,7 +179,7 @@ export default function ProjectDetailPage() {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+            <h1 className="text-2xl font-bold text-stone-900 dark:text-white">
               {project.name}
             </h1>
             <span
@@ -188,13 +188,13 @@ export default function ProjectDetailPage() {
                   ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                   : project.status === 'closed'
                   ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
-                  : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                  : 'bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300'
               }`}
             >
               {project.status === 'active' ? tStatus.active : project.status === 'closed' ? tStatus.closed : tStatus.draft}
             </span>
           </div>
-          <p className="text-slate-500 dark:text-slate-400">
+          <p className="text-stone-500 dark:text-stone-400">
             {project.clientName} ({project.clientDomain})
           </p>
           {project.deadline && (
@@ -202,7 +202,7 @@ export default function ProjectDetailPage() {
               className={`text-sm mt-1 ${
                 isDeadlinePassed(project.deadline)
                   ? 'text-red-600 dark:text-red-400'
-                  : 'text-slate-500 dark:text-slate-400'
+                  : 'text-stone-500 dark:text-stone-400'
               }`}
             >
               <Calendar className="w-4 h-4 inline mr-1" />
@@ -225,12 +225,12 @@ export default function ProjectDetailPage() {
           <div className="relative">
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+              className="p-2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 transition-colors"
             >
               <Settings className="w-5 h-5" />
             </button>
             {showSettings && (
-              <div className="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-10">
+              <div className="absolute right-0 top-full mt-1 w-48 bg-white dark:bg-stone-800 rounded-lg shadow-lg border border-stone-200 dark:border-stone-700 py-1 z-10">
                 {project.status === 'active' ? (
                   <button
                     onClick={() => updateStatus('closed')}
@@ -253,11 +253,11 @@ export default function ProjectDetailPage() {
       </div>
 
       {/* Share link */}
-      <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 rounded-xl p-6 mb-8">
-        <h2 className="font-semibold text-teal-900 dark:text-teal-100 mb-2">
+      <div className="bg-orange-50 dark:bg-orange-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6 mb-8">
+        <h2 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
           {t.shareLink}
         </h2>
-        <p className="text-sm text-teal-700 dark:text-teal-300 mb-4">
+        <p className="text-sm text-amber-700 dark:text-amber-300 mb-4">
           {shareLinkDescription}
         </p>
         <div className="flex items-center gap-2">
@@ -265,11 +265,11 @@ export default function ProjectDetailPage() {
             type="text"
             readOnly
             value={getShareUrl()}
-            className="flex-1 px-4 py-2 bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-700 rounded-lg text-sm text-slate-700 dark:text-slate-300"
+            className="flex-1 px-4 py-2 bg-white dark:bg-stone-900 border border-amber-200 dark:border-amber-700 rounded-lg text-sm text-stone-700 dark:text-stone-300"
           />
           <button
             onClick={copyShareLink}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-colors"
           >
             {copied ? (
               <>
@@ -288,42 +288,42 @@ export default function ProjectDetailPage() {
 
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
               <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+              <p className="text-2xl font-bold text-stone-900 dark:text-white">
                 {completedSessions.length}
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{t.completedResponses}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400">{t.completedResponses}</p>
             </div>
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center">
               <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+              <p className="text-2xl font-bold text-stone-900 dark:text-white">
                 {pendingSessions.length}
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{t.ongoing}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400">{t.ongoing}</p>
             </div>
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center">
-              <Users className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+            <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center">
+              <Users className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+              <p className="text-2xl font-bold text-stone-900 dark:text-white">
                 {aggregatedScores ? aggregatedScores.overallScore.toFixed(1) : '-'}
               </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{t.average}</p>
+              <p className="text-sm text-stone-500 dark:text-stone-400">{t.average}</p>
             </div>
           </div>
         </div>
@@ -331,24 +331,24 @@ export default function ProjectDetailPage() {
 
       {/* Aggregated results */}
       {aggregatedScores && (
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">
+        <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-6 mb-8">
+          <h2 className="text-lg font-semibold text-stone-900 dark:text-white mb-6">
             {t.aggregatedResults}
           </h2>
           <div className="space-y-4">
             {Object.entries(aggregatedScores.dimensionScores).map(([key, value]) => (
               <div key={key}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
                     {dimensionLabels[key as keyof typeof dimensionLabels]}
                   </span>
-                  <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <span className="text-sm font-semibold text-stone-900 dark:text-white">
                     {value.toFixed(1)}/5
                   </span>
                 </div>
-                <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-3 bg-stone-100 dark:bg-stone-700 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-teal-500 to-emerald-600 rounded-full transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-amber-500 to-orange-600 rounded-full transition-all duration-500"
                     style={{ width: `${(value / 5) * 100}%` }}
                   />
                 </div>
@@ -359,44 +359,44 @@ export default function ProjectDetailPage() {
       )}
 
       {/* Respondents table */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+      <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 overflow-hidden">
+        <div className="px-6 py-4 border-b border-stone-200 dark:border-stone-700">
+          <h2 className="text-lg font-semibold text-stone-900 dark:text-white">
             {t.respondents} ({sessions.length})
           </h2>
         </div>
         {sessions.length === 0 ? (
           <div className="text-center py-12">
-            <Users className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-500 dark:text-slate-400">
+            <Users className="w-12 h-12 text-stone-300 dark:text-stone-600 mx-auto mb-4" />
+            <p className="text-stone-500 dark:text-stone-400">
               {t.noResponsesYet}
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50 dark:bg-slate-900/50">
+              <thead className="bg-stone-50 dark:bg-stone-900/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                     {t.respondent}
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                     {tStatus.inProgress.split(' ')[0] === 'In' ? 'Status' : 'Status'}
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                     {t.date}
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+              <tbody className="divide-y divide-stone-200 dark:divide-stone-700">
                 {sessions.map((session) => (
-                  <tr key={session.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                  <tr key={session.id} className="hover:bg-stone-50 dark:hover:bg-stone-900/50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">
+                        <p className="text-sm font-medium text-stone-900 dark:text-white">
                           {session.respondentName || t.anonymous}
                         </p>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
+                        <p className="text-sm text-stone-500 dark:text-stone-400">
                           {session.respondentEmail}
                         </p>
                       </div>
@@ -414,7 +414,7 @@ export default function ProjectDetailPage() {
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 dark:text-stone-400">
                       {formatDate(session.completedAt || session.createdAt)}
                     </td>
                   </tr>

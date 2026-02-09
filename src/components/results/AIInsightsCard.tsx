@@ -20,10 +20,10 @@ interface AIInsightsCardProps {
 export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardProps) {
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-2xl p-8">
+      <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-8">
         <div className="flex items-center justify-center gap-3">
-          <Loader2 className="w-6 h-6 animate-spin text-teal-600" />
-          <span className="text-gray-600 dark:text-gray-300">
+          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+          <span className="text-stone-600 dark:text-stone-300">
             {locale === 'sv' ? 'Genererar AI-insikter...' : 'Generating AI insights...'}
           </span>
         </div>
@@ -41,7 +41,7 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
       icon: Sparkles,
       content: insights.summary,
       type: 'text' as const,
-      color: 'teal',
+      color: 'amber',
     },
     {
       title: locale === 'sv' ? 'Era styrkor' : 'Your strengths',
@@ -74,10 +74,10 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
   ];
 
   const colorClasses = {
-    teal: {
-      bg: 'bg-teal-100 dark:bg-teal-900/30',
-      icon: 'text-teal-600 dark:text-teal-400',
-      border: 'border-teal-200 dark:border-teal-800',
+    amber: {
+      bg: 'bg-amber-100 dark:bg-amber-900/30',
+      icon: 'text-amber-700 dark:text-amber-400',
+      border: 'border-amber-200 dark:border-amber-800',
     },
     green: {
       bg: 'bg-green-100 dark:bg-green-900/30',
@@ -90,22 +90,22 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
       border: 'border-orange-200 dark:border-orange-800',
     },
     cyan: {
-      bg: 'bg-cyan-100 dark:bg-cyan-900/30',
-      icon: 'text-cyan-600 dark:text-cyan-400',
-      border: 'border-cyan-200 dark:border-cyan-800',
+      bg: 'bg-yellow-100 dark:bg-yellow-900/30',
+      icon: 'text-yellow-700 dark:text-yellow-400',
+      border: 'border-yellow-200 dark:border-yellow-800',
     },
     indigo: {
-      bg: 'bg-indigo-100 dark:bg-indigo-900/30',
-      icon: 'text-indigo-600 dark:text-indigo-400',
-      border: 'border-indigo-200 dark:border-indigo-800',
+      bg: 'bg-lime-100 dark:bg-lime-900/30',
+      icon: 'text-lime-700 dark:text-lime-400',
+      border: 'border-lime-200 dark:border-lime-800',
     },
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="w-6 h-6 text-teal-600" />
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <Sparkles className="w-6 h-6 text-primary" />
+        <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
           {locale === 'sv' ? 'AI-genererade insikter' : 'AI-generated insights'}
         </h2>
       </div>
@@ -121,12 +121,12 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`${index === 0 ? 'md:col-span-2' : ''} bg-white dark:bg-slate-800 rounded-xl shadow-lg border ${colors.border} overflow-hidden`}
+              className={`${index === 0 ? 'md:col-span-2' : ''} bg-white dark:bg-stone-800 rounded-xl shadow-lg border ${colors.border} overflow-hidden`}
             >
               {/* Header */}
               <div className={`${colors.bg} px-4 py-3 flex items-center gap-2`}>
                 <Icon className={`w-5 h-5 ${colors.icon}`} />
-                <h3 className="font-semibold text-gray-900 dark:text-white">
+                <h3 className="font-semibold text-stone-900 dark:text-white">
                   {section.title}
                 </h3>
               </div>
@@ -134,7 +134,7 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
               {/* Content */}
               <div className="p-4">
                 {section.type === 'text' ? (
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
                     {section.content as string}
                   </p>
                 ) : (
@@ -142,7 +142,7 @@ export function AIInsightsCard({ insights, isLoading, locale }: AIInsightsCardPr
                     {(section.content as string[]).map((item, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <span className={`mt-1.5 w-1.5 h-1.5 rounded-full ${colors.icon.replace('text-', 'bg-')}`} />
-                        <span className="text-gray-700 dark:text-gray-300 text-sm">
+                        <span className="text-stone-700 dark:text-stone-300 text-sm">
                           {item}
                         </span>
                       </li>

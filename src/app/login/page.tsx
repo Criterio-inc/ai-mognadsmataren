@@ -50,23 +50,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-100 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full"
       >
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-2xl p-8 shadow-xl">
+        <div className="bg-white/80 dark:bg-stone-800/80 backdrop-blur rounded-2xl p-8 shadow-xl">
           <div className="flex justify-center mb-8">
-            <span className="text-2xl font-bold" style={{ color: '#1a5f5a' }}>
+            <span className="text-2xl font-bold" style={{ color: '#c96442' }}>
               AI-Mognadsmätaren
             </span>
           </div>
 
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-2">
+          <h1 className="text-2xl font-bold text-stone-900 dark:text-white text-center mb-2">
             Konsultportal
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-center mb-8">
+          <p className="text-stone-500 dark:text-stone-400 text-center mb-8">
             {isLogin ? 'Logga in för att hantera dina kundprojekt' : 'Skapa ett konto för att komma igång'}
           </p>
 
@@ -92,7 +92,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
                 <Mail className="w-4 h-4" />
                 E-postadress
               </label>
@@ -102,12 +102,12 @@ export default function LoginPage() {
                 placeholder="din.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+                className="w-full px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
               />
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
                 <Lock className="w-4 h-4" />
                 Lösenord
               </label>
@@ -118,12 +118,12 @@ export default function LoginPage() {
                   placeholder="Minst 6 tecken"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 pr-12 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-shadow text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full px-4 py-3 pr-12 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-shadow text-stone-900 dark:text-white placeholder:text-stone-400"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -135,7 +135,7 @@ export default function LoginPage() {
               disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
             >
               {isLoading ? (
                 <>
@@ -151,7 +151,7 @@ export default function LoginPage() {
             </motion.button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-6 text-center text-sm text-stone-500 dark:text-stone-400">
             {isLogin ? 'Har du inget konto?' : 'Har du redan ett konto?'}{' '}
             <button
               onClick={() => {
@@ -159,7 +159,7 @@ export default function LoginPage() {
                 setError(null);
                 setSuccess(null);
               }}
-              className="text-teal-600 dark:text-teal-400 hover:underline font-medium"
+              className="text-amber-600 dark:text-amber-400 hover:underline font-medium"
             >
               {isLogin ? 'Skapa konto' : 'Logga in'}
             </button>
@@ -167,8 +167,8 @@ export default function LoginPage() {
 
         </div>
 
-        <p className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
-          <a href="/" className="hover:text-teal-600 transition-colors">
+        <p className="mt-8 text-center text-sm text-stone-500 dark:text-stone-400">
+          <a href="/" className="hover:text-amber-600 transition-colors">
             ← Tillbaka till startsidan
           </a>
         </p>
