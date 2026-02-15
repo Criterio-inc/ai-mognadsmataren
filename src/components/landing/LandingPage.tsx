@@ -50,13 +50,18 @@ export function LandingPage({ onStart }: LandingPageProps) {
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
             {locale === 'sv'
-              ? 'Mät er organisations AI-mognad inom 8 strategiska dimensioner'
-              : 'Measure your organization\'s AI maturity across 8 strategic dimensions'}
+              ? 'Förstå var er organisation står – och vad som krävs för att ta nästa steg med AI'
+              : 'Understand where your organization stands – and what it takes to advance with AI'}
           </p>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto italic">
+          <p className="text-muted-foreground mb-4 max-w-2xl mx-auto">
             {locale === 'sv'
-              ? '"AI-mognad är inte en teknikfråga – det är en ledningsfråga"'
-              : '"AI maturity is not a technology question – it\'s a leadership question"'}
+              ? 'En strukturerad bedömning inom 8 strategiska dimensioner – från strategi och styrning till data, kompetens och organisation. Med hänsyn till EU:s AI-förordning.'
+              : 'A structured assessment across 8 strategic dimensions – from strategy and governance to data, competence and organization. With EU AI Act considerations.'}
+          </p>
+          <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto border border-border rounded-lg px-4 py-2 inline-block">
+            {locale === 'sv'
+              ? 'Utformad för ledningsgrupper, IT-ledning, verksamhetsutvecklare och utvecklingschefer'
+              : 'Designed for management teams, IT leadership, business developers and development managers'}
           </p>
 
           <motion.button
@@ -311,18 +316,18 @@ export function LandingPage({ onStart }: LandingPageProps) {
           <div className="space-y-4 text-muted-foreground">
             <p>
               {locale === 'sv'
-                ? 'En AI-mognadsmätning skapar ett gemensamt och verifierbart nuläge för hela organisationen. Den flyttar dialogen från upplevda behov och lösryckta AI-initiativ till en sammanhängande förståelse för hur strategi, data, kompetens, styrning och teknik faktiskt hänger ihop i er AI-resa.'
-                : 'An AI maturity assessment creates a shared and verifiable baseline for the entire organization. It shifts the dialogue from perceived needs and disconnected AI initiatives to a coherent understanding of how strategy, data, competence, governance and technology actually connect in your AI journey.'}
+                ? 'Många organisationer diskuterar AI men saknar en gemensam bild av var de faktiskt står. En AI-mognadsmätning ger ledningsgrupp, IT-ledning och verksamhetsutvecklare ett strukturerat och verifierbart nuläge – inte baserat på teknikjargong, utan på strategiska förutsättningar som avgör om AI-satsningar lyckas.'
+                : 'Many organizations discuss AI but lack a shared picture of where they actually stand. An AI maturity assessment gives management teams, IT leadership and business developers a structured and verifiable baseline – not based on technical jargon, but on strategic prerequisites that determine whether AI initiatives succeed.'}
             </p>
             <p>
               {locale === 'sv'
-                ? 'Med EU:s AI-förordning (AI Act) som träder i kraft är det viktigare än någonsin att förstå var ni står – både vad gäller teknisk mognad och regelefterlevnad. En strukturerad bedömning ger er verktygen att prioritera rätt och agera proaktivt.'
-                : 'With the EU AI Act coming into effect, it is more important than ever to understand where you stand – both in terms of technical maturity and regulatory compliance. A structured assessment gives you the tools to prioritize correctly and act proactively.'}
+                ? 'Verktyget bedömer 8 dimensioner som speglar helheten: från strategi och ledarskap till data, kompetens, styrning och organisation. Med EU:s AI-förordning (AI Act) som träder i kraft är det viktigare än någonsin att förstå var ni står – både vad gäller organisatorisk mognad och regelefterlevnad.'
+                : 'The tool assesses 8 dimensions that reflect the whole picture: from strategy and leadership to data, competence, governance and organization. With the EU AI Act coming into effect, it is more important than ever to understand where you stand – both in terms of organizational maturity and regulatory compliance.'}
             </p>
             <p className="font-medium text-foreground">
               {locale === 'sv'
-                ? 'Resultatet är en AI-förflyttning som bygger på genomförbarhet, tydligt ansvar och ett tempo som organisationen faktiskt klarar att hålla över tid.'
-                : 'The result is an AI transformation built on feasibility, clear accountability and a pace the organization can actually sustain over time.'}
+                ? 'Resultatet är en gemensam utgångspunkt för att prioritera rätt, tilldela ansvar och driva en AI-förflyttning i ett tempo som organisationen faktiskt klarar att hålla.'
+                : 'The result is a shared starting point for prioritizing correctly, assigning responsibility and driving an AI transformation at a pace the organization can actually sustain.'}
             </p>
           </div>
         </motion.div>
