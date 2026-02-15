@@ -7,6 +7,7 @@ import { isDeadlinePassed } from '@/lib/utils';
 type Params = Promise<{ sessionId: string }>;
 
 // Calculate dimension scores from responses
+// "Ej aktuellt" (value 0) is excluded from score averages but tracked separately
 function calculateScores(responsesMap: Record<number, number>) {
   const dimensions = {
     strategiLedarskap: [1, 2, 3, 4],
@@ -22,7 +23,8 @@ function calculateScores(responsesMap: Record<number, number>) {
   const dimensionScores: Record<string, number> = {};
 
   for (const [key, questionIds] of Object.entries(dimensions)) {
-    const values = questionIds.map((id) => responsesMap[id]).filter((v) => v !== undefined);
+    // Exclude "Ej aktuellt" (0) from the average
+    const values = questionIds.map((id) => responsesMap[id]).filter((v) => v !== undefined && v > 0);
     if (values.length > 0) {
       dimensionScores[key] = values.reduce((a, b) => a + b, 0) / values.length;
     } else {
@@ -30,7 +32,8 @@ function calculateScores(responsesMap: Record<number, number>) {
     }
   }
 
-  const allValues = Object.values(responsesMap).filter((v) => v !== undefined);
+  // Exclude "Ej aktuellt" (0) from the overall average
+  const allValues = Object.values(responsesMap).filter((v) => v !== undefined && v > 0);
   const overallScore = allValues.length > 0 ? allValues.reduce((a, b) => a + b, 0) / allValues.length : 0;
 
   // Map to maturity level (1-5)
@@ -49,7 +52,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Params }) {
   const body = await req.json();
   const { questionId, value } = body;
 
-  if (!questionId || !value) {
+  if (!questionId || value == null) {
     return NextResponse.json({ error: 'questionId and value are required' }, { status: 400 });
   }
 

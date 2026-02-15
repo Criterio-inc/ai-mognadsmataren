@@ -489,16 +489,36 @@ export function calculateDimensionScore(
   dimension: Dimension
 ): number {
   const dimQuestions = getQuestionsByDimension(dimension);
-  const scores = dimQuestions
+  const allValues = dimQuestions
     .map((q) => responses.get(q.id))
     .filter((v): v is number => v !== undefined);
+  // Exclude "Ej aktuellt" (0) from the average calculation
+  const scores = allValues.filter((v) => v > 0);
 
   if (scores.length === 0) return 0;
   return scores.reduce((a, b) => a + b, 0) / scores.length;
 }
 
 export function calculateOverallScore(responses: Map<number, number>): number {
-  const allScores = Array.from(responses.values());
+  // Exclude "Ej aktuellt" (0) from the average calculation
+  const allScores = Array.from(responses.values()).filter((v) => v > 0);
   if (allScores.length === 0) return 0;
   return allScores.reduce((a, b) => a + b, 0) / allScores.length;
+}
+
+// Count "Ej aktuellt" responses per dimension
+export function countNotApplicable(
+  responses: Map<number, number>,
+  dimension: Dimension
+): number {
+  const dimQuestions = getQuestionsByDimension(dimension);
+  return dimQuestions
+    .map((q) => responses.get(q.id))
+    .filter((v) => v === 0)
+    .length;
+}
+
+// Count total "Ej aktuellt" responses
+export function countTotalNotApplicable(responses: Map<number, number>): number {
+  return Array.from(responses.values()).filter((v) => v === 0).length;
 }

@@ -16,7 +16,7 @@ interface ResultsDashboardProps {
 
 export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
   const { locale, getResponsesMap } = useAssessmentStore();
-  const { dimensionScores, overallScore, maturityLevel, aiInsights, isLoading, setAiInsights, setIsLoading } = useResultsStore();
+  const { dimensionScores, overallScore, maturityLevel, notApplicableCounts, aiInsights, isLoading, setAiInsights, setIsLoading } = useResultsStore();
 
   // Fetch AI insights on mount
   useEffect(() => {
@@ -33,6 +33,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             overallScore,
             maturityLevel,
             locale,
+            notApplicableCounts,
           }),
         });
 
@@ -138,7 +139,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
             {locale === 'sv' ? 'Dimensioner i detalj' : 'Dimensions in detail'}
           </h2>
-          <DimensionBars scores={dimensionScores} locale={locale} />
+          <DimensionBars scores={dimensionScores} locale={locale} notApplicableCounts={notApplicableCounts || undefined} />
         </motion.div>
 
         {/* AI Insights */}
