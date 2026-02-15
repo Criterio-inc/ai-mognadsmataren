@@ -5,6 +5,7 @@ interface AIInsightsInput {
   overallScore: number;
   maturityLevel: number;
   locale: 'sv' | 'en';
+  notApplicableCounts?: Record<Dimension, number>;
 }
 
 interface AIInsights {
@@ -160,7 +161,7 @@ const predefinedContent = {
 };
 
 export async function generateAIInsights(input: AIInsightsInput): Promise<AIInsights> {
-  const { dimensionScores, overallScore, maturityLevel, locale } = input;
+  const { dimensionScores, overallScore, maturityLevel, locale, notApplicableCounts } = input;
 
   // Sort dimensions by score
   const sortedDimensions = dimensions
@@ -172,6 +173,17 @@ export async function generateAIInsights(input: AIInsightsInput): Promise<AIInsi
 
   const currentLevel = maturityLevels.find((l) => l.level === maturityLevel)!;
 
+  // Build "Ej aktuellt" info per dimension
+  const notApplicableInfo = notApplicableCounts
+    ? dimensions
+        .filter((d) => (notApplicableCounts[d.id] || 0) > 0)
+        .map((d) => ({
+          name: d[locale].name,
+          count: notApplicableCounts[d.id],
+          totalQuestions: 4,
+        }))
+    : [];
+
   // Build context for AI
   const context = {
     overallScore: overallScore.toFixed(1),
@@ -180,9 +192,11 @@ export async function generateAIInsights(input: AIInsightsInput): Promise<AIInsi
     dimensionScores: dimensions.map((d) => ({
       name: d[locale].name,
       score: dimensionScores[d.id].toFixed(1),
+      notApplicableCount: notApplicableCounts?.[d.id] || 0,
     })),
     strongestAreas: strongestDims.map((d) => d[locale].name),
     weakestAreas: weakestDims.map((d) => d[locale].name),
+    notApplicableInfo,
   };
 
   // Try AI generation via OpenRouter
@@ -204,9 +218,10 @@ async function callOpenRouter(
     overallScore: string;
     maturityLevel: number;
     maturityLevelName: string;
-    dimensionScores: { name: string; score: string }[];
+    dimensionScores: { name: string; score: string; notApplicableCount: number }[];
     strongestAreas: string[];
     weakestAreas: string[];
+    notApplicableInfo: { name: string; count: number; totalQuestions: number }[];
   },
   locale: 'sv' | 'en'
 ): Promise<AIInsights | null> {
@@ -229,22 +244,34 @@ async function callOpenRouter(
        Always respond in English. Be professional yet warm in tone.
        Focus on practical next steps, not abstract concepts.`;
 
+  const notApplicableSv = context.notApplicableInfo.length > 0
+    ? `\n\n       Dimensioner med "Ej aktuellt"-svar (frågor markerade som ej tillämpbara):
+       ${context.notApplicableInfo.map((d) => `- ${d.name}: ${d.count} av ${d.totalQuestions} frågor markerade som "Ej aktuellt"`).join('\n')}
+       OBS: "Ej aktuellt"-svar exkluderas från poängberäkningen men är i sig en viktig signal om organisationens mognad inom dessa områden.`
+    : '';
+
+  const notApplicableEn = context.notApplicableInfo.length > 0
+    ? `\n\n       Dimensions with "Not applicable" responses (questions marked as not applicable):
+       ${context.notApplicableInfo.map((d) => `- ${d.name}: ${d.count} of ${d.totalQuestions} questions marked as "Not applicable"`).join('\n')}
+       NOTE: "Not applicable" responses are excluded from score calculations but are themselves an important signal about the organization's maturity in these areas.`
+    : '';
+
   const userPrompt = locale === 'sv'
     ? `Analysera följande AI-mognadsbedömning för en organisation:
 
        Övergripande poäng: ${context.overallScore}/5 (Nivå ${context.maturityLevel}: ${context.maturityLevelName})
 
        Dimensionspoäng:
-       ${context.dimensionScores.map((d) => `- ${d.name}: ${d.score}/5`).join('\n')}
+       ${context.dimensionScores.map((d) => `- ${d.name}: ${d.score}/5${d.notApplicableCount > 0 ? ` (${d.notApplicableCount} av 4 frågor markerade som "Ej aktuellt")` : ''}`).join('\n')}
 
        Starkaste områden: ${context.strongestAreas.join(', ') || 'Inga tydligt starka'}
-       Svagaste områden: ${context.weakestAreas.join(', ') || 'Inga tydligt svaga'}
+       Svagaste områden: ${context.weakestAreas.join(', ') || 'Inga tydligt svaga'}${notApplicableSv}
 
        Ge en JSON-respons med följande struktur:
        {
-         "summary": "2-3 meningar som sammanfattar resultatet med hänsyn till EU:s AI-förordning och branschpraxis",
+         "summary": "2-3 meningar som sammanfattar resultatet med hänsyn till EU:s AI-förordning och branschpraxis. Om frågor markerats som 'Ej aktuellt', kommentera vad detta signalerar om organisationens mognad.",
          "strengths": ["3 styrkor baserat på höga poäng"],
-         "improvements": ["3 förbättringsområden baserat på låga poäng"],
+         "improvements": ["3 förbättringsområden baserat på låga poäng och/eller dimensioner med många 'Ej aktuellt'-svar"],
          "recommendations": ["3 konkreta rekommendationer anpassade efter AI-mognadsnivån"],
          "nextSteps": ["3 praktiska nästa steg för de kommande 3-6 månaderna"]
        }`
@@ -253,16 +280,16 @@ async function callOpenRouter(
        Overall score: ${context.overallScore}/5 (Level ${context.maturityLevel}: ${context.maturityLevelName})
 
        Dimension scores:
-       ${context.dimensionScores.map((d) => `- ${d.name}: ${d.score}/5`).join('\n')}
+       ${context.dimensionScores.map((d) => `- ${d.name}: ${d.score}/5${d.notApplicableCount > 0 ? ` (${d.notApplicableCount} of 4 questions marked as "Not applicable")` : ''}`).join('\n')}
 
        Strongest areas: ${context.strongestAreas.join(', ') || 'None clearly strong'}
-       Weakest areas: ${context.weakestAreas.join(', ') || 'None clearly weak'}
+       Weakest areas: ${context.weakestAreas.join(', ') || 'None clearly weak'}${notApplicableEn}
 
        Provide a JSON response with the following structure:
        {
-         "summary": "2-3 sentences summarizing the result with consideration for the EU AI Act and industry best practices",
+         "summary": "2-3 sentences summarizing the result with consideration for the EU AI Act and industry best practices. If questions were marked as 'Not applicable', comment on what this signals about the organization's maturity.",
          "strengths": ["3 strengths based on high scores"],
-         "improvements": ["3 areas for improvement based on low scores"],
+         "improvements": ["3 areas for improvement based on low scores and/or dimensions with many 'Not applicable' responses"],
          "recommendations": ["3 concrete recommendations adapted to the AI maturity level"],
          "nextSteps": ["3 practical next steps for the coming 3-6 months"]
        }`;
@@ -307,7 +334,7 @@ async function callOpenRouter(
 }
 
 function generatePredefinedInsights(input: AIInsightsInput): AIInsights {
-  const { dimensionScores, overallScore, maturityLevel, locale } = input;
+  const { dimensionScores, overallScore, maturityLevel, locale, notApplicableCounts } = input;
 
   const sortedDimensions = dimensions
     .map((d) => ({ ...d, score: dimensionScores[d.id] }))
@@ -316,12 +343,26 @@ function generatePredefinedInsights(input: AIInsightsInput): AIInsights {
   const strongestDim = sortedDimensions[0];
   const weakestDim = sortedDimensions[sortedDimensions.length - 1];
 
+  // Dimensions where all questions are "Ej aktuellt"
+  const fullyNaDimensions = notApplicableCounts
+    ? dimensions.filter((d) => (notApplicableCounts[d.id] || 0) === 4)
+    : [];
+  const totalNaCount = notApplicableCounts
+    ? Object.values(notApplicableCounts).reduce((a, b) => a + b, 0)
+    : 0;
+
   const currentLevel = maturityLevels.find((l) => l.level === maturityLevel)!;
   const content = predefinedContent[locale];
 
+  const naNote = totalNaCount > 0
+    ? locale === 'sv'
+      ? ` ${totalNaCount} frågor markerades som "Ej aktuellt", vilket i sig ger värdefull information om vilka AI-områden organisationen ännu inte har adresserat.`
+      : ` ${totalNaCount} questions were marked as "Not applicable", which itself provides valuable information about which AI areas the organization has not yet addressed.`
+    : '';
+
   const summary = locale === 'sv'
-    ? `Er organisation befinner sig på nivå ${maturityLevel} (${currentLevel.sv.name}) i AI-mognad med en övergripande poäng på ${overallScore.toFixed(1)}/5. Mognadsnivåerna sträcker sig från Utforskande till Ledande, och ert resultat indikerar var ni står i resan mot att bli en AI-driven organisation. ${strongestDim[locale].name} är ert starkaste område medan ${weakestDim[locale].name} har störst utvecklingspotential. Med tanke på EU:s AI-förordning är det viktigt att arbeta strukturerat med styrning och etik parallellt med teknisk utveckling.`
-    : `Your organization is at level ${maturityLevel} (${currentLevel.en.name}) in AI maturity with an overall score of ${overallScore.toFixed(1)}/5. The maturity levels range from Exploring to Leading, and your result indicates where you stand on the journey toward becoming an AI-driven organization. ${strongestDim[locale].name} is your strongest area while ${weakestDim[locale].name} has the most development potential. Given the EU AI Act, it is important to work systematically on governance and ethics alongside technical development.`;
+    ? `Er organisation befinner sig på nivå ${maturityLevel} (${currentLevel.sv.name}) i AI-mognad med en övergripande poäng på ${overallScore.toFixed(1)}/5. Mognadsnivåerna sträcker sig från Utforskande till Ledande, och ert resultat indikerar var ni står i resan mot att bli en AI-driven organisation. ${strongestDim[locale].name} är ert starkaste område medan ${weakestDim[locale].name} har störst utvecklingspotential.${naNote} Med tanke på EU:s AI-förordning är det viktigt att arbeta strukturerat med styrning och etik parallellt med teknisk utveckling.`
+    : `Your organization is at level ${maturityLevel} (${currentLevel.en.name}) in AI maturity with an overall score of ${overallScore.toFixed(1)}/5. The maturity levels range from Exploring to Leading, and your result indicates where you stand on the journey toward becoming an AI-driven organization. ${strongestDim[locale].name} is your strongest area while ${weakestDim[locale].name} has the most development potential.${naNote} Given the EU AI Act, it is important to work systematically on governance and ethics alongside technical development.`;
 
   const strengths = content.strengths[strongestDim.id as keyof typeof content.strengths] || [];
   const improvements = content.improvements[weakestDim.id as keyof typeof content.improvements] || [];

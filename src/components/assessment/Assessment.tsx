@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { questions, calculateDimensionScore, calculateOverallScore, getMaturityLevel, dimensions } from '@/lib/questions';
+import { questions, calculateDimensionScore, calculateOverallScore, getMaturityLevel, dimensions, countNotApplicable } from '@/lib/questions';
 import { useAssessmentStore, useResultsStore } from '@/lib/store';
 import { QuestionCard } from './QuestionCard';
 import { ProgressBar } from './ProgressBar';
@@ -33,11 +33,17 @@ export function Assessment({ onComplete }: AssessmentProps) {
         return acc;
       }, {} as Record<Dimension, number>);
 
+      // Count "Ej aktuellt" responses per dimension
+      const notApplicableCounts = dimensions.reduce((acc, dim) => {
+        acc[dim.id] = countNotApplicable(responsesMap, dim.id);
+        return acc;
+      }, {} as Record<Dimension, number>);
+
       // Calculate overall score and maturity level
       const overallScore = calculateOverallScore(responsesMap);
       const maturityLevel = getMaturityLevel(overallScore).level;
 
-      setResults(dimensionScores, overallScore, maturityLevel);
+      setResults(dimensionScores, overallScore, maturityLevel, notApplicableCounts);
       onComplete();
     }
   }, [currentQuestionIndex, setCurrentQuestionIndex, getResponsesMap, setResults, setIsLoading, onComplete]);

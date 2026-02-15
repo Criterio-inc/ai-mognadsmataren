@@ -31,6 +31,11 @@ const scaleLabels = {
   ],
 };
 
+const notApplicableLabel = {
+  sv: 'Ej aktuellt',
+  en: 'Not applicable',
+};
+
 export function QuestionCard({
   question,
   questionNumber,
@@ -109,6 +114,41 @@ export function QuestionCard({
             </div>
           </motion.button>
         ))}
+
+        {/* Not applicable option */}
+        <div className="pt-2 border-t border-stone-100 dark:border-stone-700/50">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleSelect(0)}
+            className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
+              currentValue === 0
+                ? 'border-stone-500 bg-stone-100 dark:bg-stone-700/50'
+                : 'border-stone-200 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500'
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                  currentValue === 0
+                    ? 'bg-stone-500 text-white'
+                    : 'bg-stone-200 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
+                }`}
+              >
+                –
+              </div>
+              <span
+                className={`text-sm md:text-base ${
+                  currentValue === 0
+                    ? 'text-stone-700 dark:text-stone-200 font-medium'
+                    : 'text-stone-500 dark:text-stone-400'
+                }`}
+              >
+                {notApplicableLabel[locale]}
+              </span>
+            </div>
+          </motion.button>
+        </div>
       </div>
 
       {/* Navigation buttons */}
@@ -127,9 +167,9 @@ export function QuestionCard({
 
         <button
           onClick={onNext}
-          disabled={currentValue === undefined}
+          disabled={currentValue == null}
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
-            currentValue === undefined
+            currentValue == null
               ? 'bg-stone-100 text-stone-400 cursor-not-allowed dark:bg-stone-800'
               : 'bg-primary text-white hover:opacity-90'
           }`}

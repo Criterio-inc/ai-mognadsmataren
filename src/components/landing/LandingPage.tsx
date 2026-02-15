@@ -45,17 +45,6 @@ export function LandingPage({ onStart }: LandingPageProps) {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          {/* AI Mognadsmätaren logo */}
-          <div className="flex justify-center mb-8">
-            <Image
-              src="/aimognad-logo.png"
-              alt="AI-Mognadsmätaren"
-              width={160}
-              height={160}
-              className="w-28 h-28 md:w-40 md:h-40 drop-shadow-lg"
-              priority
-            />
-          </div>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             {locale === 'sv' ? 'AI-Mognadsmätaren' : 'AI Maturity Meter'}
           </h1>

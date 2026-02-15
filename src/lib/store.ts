@@ -55,6 +55,7 @@ interface ResultsState {
   dimensionScores: Record<Dimension, number> | null;
   overallScore: number | null;
   maturityLevel: number | null;
+  notApplicableCounts: Record<Dimension, number> | null;
   aiInsights: {
     summary: string;
     strengths: string[];
@@ -63,7 +64,7 @@ interface ResultsState {
     nextSteps: string[];
   } | null;
   isLoading: boolean;
-  setResults: (dimensionScores: Record<Dimension, number>, overallScore: number, maturityLevel: number) => void;
+  setResults: (dimensionScores: Record<Dimension, number>, overallScore: number, maturityLevel: number, notApplicableCounts?: Record<Dimension, number>) => void;
   setAiInsights: (insights: ResultsState['aiInsights']) => void;
   setIsLoading: (loading: boolean) => void;
   reset: () => void;
@@ -73,10 +74,11 @@ export const useResultsStore = create<ResultsState>((set) => ({
   dimensionScores: null,
   overallScore: null,
   maturityLevel: null,
+  notApplicableCounts: null,
   aiInsights: null,
   isLoading: false,
-  setResults: (dimensionScores, overallScore, maturityLevel) =>
-    set({ dimensionScores, overallScore, maturityLevel }),
+  setResults: (dimensionScores, overallScore, maturityLevel, notApplicableCounts) =>
+    set({ dimensionScores, overallScore, maturityLevel, notApplicableCounts: notApplicableCounts || null }),
   setAiInsights: (aiInsights) => set({ aiInsights }),
   setIsLoading: (isLoading) => set({ isLoading }),
   reset: () =>
@@ -84,6 +86,7 @@ export const useResultsStore = create<ResultsState>((set) => ({
       dimensionScores: null,
       overallScore: null,
       maturityLevel: null,
+      notApplicableCounts: null,
       aiInsights: null,
       isLoading: false,
     }),

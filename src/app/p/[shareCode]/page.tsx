@@ -130,6 +130,8 @@ export default function SurveyPage() {
     { value: 5, label: t.rating5 },
   ];
 
+  const notApplicableLabel = locale === 'sv' ? 'Ej aktuellt' : 'Not applicable';
+
   function goNext() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -397,6 +399,37 @@ export default function SurveyPage() {
                   </span>
                 </button>
               ))}
+
+              {/* Not applicable option */}
+              <div className="pt-2 border-t border-stone-100 dark:border-stone-700/50">
+                <button
+                  onClick={() => saveResponse(currentQuestion.id, 0)}
+                  className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
+                    responses[currentQuestion.id] === 0
+                      ? 'border-stone-500 bg-stone-100 dark:bg-stone-700/50'
+                      : 'border-stone-200 dark:border-stone-700 hover:border-stone-300 dark:hover:border-stone-600'
+                  }`}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                      responses[currentQuestion.id] === 0
+                        ? 'bg-stone-500 text-white'
+                        : 'bg-stone-100 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
+                    }`}
+                  >
+                    –
+                  </div>
+                  <span
+                    className={`text-left ${
+                      responses[currentQuestion.id] === 0
+                        ? 'text-stone-700 dark:text-stone-200 font-medium'
+                        : 'text-stone-500 dark:text-stone-400'
+                    }`}
+                  >
+                    {notApplicableLabel}
+                  </span>
+                </button>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -424,7 +457,7 @@ export default function SurveyPage() {
           ) : (
             <button
               onClick={goNext}
-              disabled={!responses[currentQuestion?.id]}
+              disabled={responses[currentQuestion?.id] == null}
               className="flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.next}
