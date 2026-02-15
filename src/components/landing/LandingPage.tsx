@@ -58,11 +58,13 @@ export function LandingPage({ onStart }: LandingPageProps) {
               ? 'En strukturerad bedömning inom 8 strategiska dimensioner – från strategi och styrning till data, kompetens och organisation. Med hänsyn till EU:s AI-förordning.'
               : 'A structured assessment across 8 strategic dimensions – from strategy and governance to data, competence and organization. With EU AI Act considerations.'}
           </p>
-          <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto border border-border rounded-lg px-4 py-2 inline-block">
-            {locale === 'sv'
-              ? 'Utformad för ledningsgrupper, IT-ledning, verksamhetsutvecklare och utvecklingschefer'
-              : 'Designed for management teams, IT leadership, business developers and development managers'}
-          </p>
+          <div className="mb-8">
+            <span className="text-sm text-muted-foreground border border-border rounded-lg px-4 py-2 inline-block">
+              {locale === 'sv'
+                ? 'Utformad för ledningsgrupper, IT-ledning, verksamhetsutvecklare och utvecklingschefer'
+                : 'Designed for management teams, IT leadership, business developers and development managers'}
+            </span>
+          </div>
 
           <motion.button
             onClick={onStart}
