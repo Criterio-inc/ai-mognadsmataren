@@ -138,7 +138,7 @@ export const translations = {
     dataInfrastruktur: { sv: 'Data & Infrastruktur', en: 'Data & Infrastructure' },
     kompetensKultur: { sv: 'Kompetens & Kultur', en: 'Competence & Culture' },
     styrningEtik: { sv: 'Styrning & Etik', en: 'Governance & Ethics' },
-    teknikArkitektur: { sv: 'Teknik & Arkitektur', en: 'Technology & Architecture' },
+    teknikArkitektur: { sv: 'Tekniska förutsättningar', en: 'Technical Readiness' },
     organisationProcesser: { sv: 'Organisation & Processer', en: 'Organization & Processes' },
     ekosystemInnovation: { sv: 'Ekosystem & Innovation', en: 'Ecosystem & Innovation' },
   },

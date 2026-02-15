@@ -74,11 +74,11 @@ export const dimensions: DimensionInfo[] = [
     id: 'dataInfrastruktur',
     sv: {
       name: 'Data & Infrastruktur',
-      description: 'Datakvalitet, datastrategi och infrastrukturens förmåga att stödja AI-arbetsbelastningar',
+      description: 'Datakvalitet, datastrategi och den tekniska miljöns förmåga att stödja AI-satsningar',
     },
     en: {
       name: 'Data & Infrastructure',
-      description: 'Data quality, data strategy and infrastructure capability to support AI workloads',
+      description: 'Data quality, data strategy and the technical environment\'s ability to support AI initiatives',
     },
     questionIds: [9, 10, 11, 12],
   },
@@ -109,12 +109,12 @@ export const dimensions: DimensionInfo[] = [
   {
     id: 'teknikArkitektur',
     sv: {
-      name: 'Teknik & Arkitektur',
-      description: 'Teknisk plattform, MLOps-mognad och säkerhet för AI-utveckling och driftsättning',
+      name: 'Tekniska förutsättningar',
+      description: 'Organisationens tekniska beredskap att utveckla, kvalitetssäkra och driftsätta AI-lösningar',
     },
     en: {
-      name: 'Technology & Architecture',
-      description: 'Technical platform, MLOps maturity and security for AI development and deployment',
+      name: 'Technical Readiness',
+      description: 'The organization\'s technical readiness to develop, quality-assure and deploy AI solutions',
     },
     questionIds: [21, 22, 23, 24],
   },
@@ -201,8 +201,8 @@ export const questions: Question[] = [
   {
     id: 9,
     dimension: 'dataInfrastruktur',
-    sv: 'Vår datakvalitet är tillräckligt hög för att träna och driftsätta pålitliga AI-modeller',
-    en: 'Our data quality is sufficiently high to train and deploy reliable AI models',
+    sv: 'Vår datakvalitet är tillräckligt hög för att kunna användas som grund för pålitliga AI-lösningar',
+    en: 'Our data quality is sufficiently high to serve as a foundation for reliable AI solutions',
   },
   {
     id: 10,
@@ -213,14 +213,14 @@ export const questions: Question[] = [
   {
     id: 11,
     dimension: 'dataInfrastruktur',
-    sv: 'Vår infrastruktur (beräkningskraft, molntjänster, GPU-resurser) möter kraven från våra AI-arbetsbelastningar',
-    en: 'Our infrastructure (compute power, cloud services, GPU resources) meets the demands of our AI workloads',
+    sv: 'Vi har säkerställt att vår tekniska miljö har den kapacitet som krävs för att stödja våra AI-satsningar',
+    en: 'We have ensured that our technical environment has the capacity required to support our AI initiatives',
   },
   {
     id: 12,
     dimension: 'dataInfrastruktur',
-    sv: 'Vår data är väldokumenterad med tydliga metadata, datakatalog och linjespårning som underlättar AI-utveckling',
-    en: 'Our data is well-documented with clear metadata, data catalog and lineage tracking that facilitates AI development',
+    sv: 'Vi har god överblick över vilken data vi har, var den finns, och kan bedöma dess kvalitet och användbarhet för AI',
+    en: 'We have a good overview of what data we have, where it resides, and can assess its quality and usability for AI',
   },
 
   // KOMPETENS & KULTUR (13-16)
@@ -265,8 +265,8 @@ export const questions: Question[] = [
   {
     id: 19,
     dimension: 'styrningEtik',
-    sv: 'Vi har etablerade processer för att hantera AI-risker som partiskhet, integritetsintrång och felaktiga resultat',
-    en: 'We have established processes for managing AI risks such as bias, privacy violations and erroneous outputs',
+    sv: 'Vi har etablerade processer för att identifiera och hantera risker med AI, såsom snedvridna resultat, integritetsfrågor och felaktiga beslut',
+    en: 'We have established processes for identifying and managing AI risks, such as skewed results, privacy concerns and erroneous decisions',
   },
   {
     id: 20,
@@ -279,26 +279,26 @@ export const questions: Question[] = [
   {
     id: 21,
     dimension: 'teknikArkitektur',
-    sv: 'Vår tekniska plattform stödjer hela AI-livscykeln: utveckling, träning, testning och driftsättning av modeller',
-    en: 'Our technical platform supports the entire AI lifecycle: development, training, testing and deployment of models',
+    sv: 'Vi har en tydlig process för hur AI-lösningar utvecklas, kvalitetssäkras och tas i drift i vår organisation',
+    en: 'We have a clear process for how AI solutions are developed, quality-assured and put into production in our organization',
   },
   {
     id: 22,
     dimension: 'teknikArkitektur',
-    sv: 'Vi har etablerade MLOps-praktiker för att hantera modellers livscykel, versionering och övervakning i produktion',
-    en: 'We have established MLOps practices for managing model lifecycle, versioning and monitoring in production',
+    sv: 'Vi har rutiner som säkerställer att våra AI-lösningar i drift fungerar tillförlitligt och kan uppdateras vid behov',
+    en: 'We have routines that ensure our AI solutions in production work reliably and can be updated when needed',
   },
   {
     id: 23,
     dimension: 'teknikArkitektur',
-    sv: 'AI-lösningar är integrerade i vårt befintliga IT-landskap med tydliga gränssnitt och dataflöden',
-    en: 'AI solutions are integrated into our existing IT landscape with clear interfaces and data flows',
+    sv: 'Våra AI-lösningar är kopplade till befintliga system och processer så att de skapar värde i det dagliga arbetet',
+    en: 'Our AI solutions are connected to existing systems and processes so that they create value in daily work',
   },
   {
     id: 24,
     dimension: 'teknikArkitektur',
-    sv: 'Vi tillämpar säkerhet och integritetsskydd genom hela designprocessen (security and privacy by design) för våra AI-system',
-    en: 'We apply security and privacy protection throughout the design process (security and privacy by design) for our AI systems',
+    sv: 'Säkerhet och integritetsskydd är en naturlig del av hur vi utvärderar, utvecklar och använder AI-lösningar',
+    en: 'Security and privacy protection are a natural part of how we evaluate, develop and use AI solutions',
   },
 
   // ORGANISATION & PROCESSER (25-28)
@@ -410,7 +410,7 @@ export const maturityLevels: MaturityLevel[] = [
       characteristics:
         'En AI-strategi eller handlingsplan finns dokumenterad, om än inte alltid fullt förankrad i hela organisationen. Ledningen har utsett ansvariga för AI och avsatt dedikerade resurser. Datastrategi och datakvalitetsarbete har påbörjats med fokus på AI-behov. De första riktlinjerna för ansvarsfull AI och EU AI Act-efterlevnad har utarbetats. AI-kompetens byggs genom utbildningsprogram och rekrytering. Tvärfunktionellt samarbete kring AI börjar etableras men är ännu inte moget.',
       typicalNeeds:
-        'Förankring av AI-strategin genom hela organisationen med tydlig kommunikation och förväntansbild. Stöd i att bygga ett robust styrningsramverk (AI governance) som balanserar innovation med ansvar. Vidareutveckling av datastrategin till en praktisk implementationsplan. Djupare EU AI Act-analys med klassificering av organisationens AI-system efter riskklasser. Formalisering av tvärfunktionella samarbetsstrukturer och beslutsprocesser. En MLOps-färdplan för att professionalisera modellhanteringen.',
+        'Förankring av AI-strategin genom hela organisationen med tydlig kommunikation och förväntansbild. Stöd i att bygga ett robust styrningsramverk (AI governance) som balanserar innovation med ansvar. Vidareutveckling av datastrategin till en praktisk implementationsplan. Djupare EU AI Act-analys med klassificering av organisationens AI-system efter riskklasser. Formalisering av tvärfunktionella samarbetsstrukturer och beslutsprocesser. En plan för att professionalisera hanteringen av AI-lösningar i drift.',
     },
     en: {
       name: 'Formalizing',
@@ -419,7 +419,7 @@ export const maturityLevels: MaturityLevel[] = [
       characteristics:
         'An AI strategy or action plan is documented, although not always fully anchored across the entire organization. Leadership has appointed people responsible for AI and allocated dedicated resources. Data strategy and data quality work has begun with a focus on AI needs. The first guidelines for responsible AI and EU AI Act compliance have been developed. AI competence is being built through training programs and recruitment. Cross-functional collaboration around AI is beginning to be established but is not yet mature.',
       typicalNeeds:
-        'Anchoring the AI strategy throughout the organization with clear communication and expectation setting. Support in building a robust governance framework (AI governance) that balances innovation with responsibility. Further development of the data strategy into a practical implementation plan. Deeper EU AI Act analysis with classification of the organization\'s AI systems by risk classes. Formalization of cross-functional collaboration structures and decision processes. An MLOps roadmap to professionalize model management.',
+        'Anchoring the AI strategy throughout the organization with clear communication and expectation setting. Support in building a robust governance framework (AI governance) that balances innovation with responsibility. Further development of the data strategy into a practical implementation plan. Deeper EU AI Act analysis with classification of the organization\'s AI systems by risk classes. Formalization of cross-functional collaboration structures and decision processes. A plan to professionalize the management of AI solutions in production.',
     },
   },
   {
@@ -430,18 +430,18 @@ export const maturityLevels: MaturityLevel[] = [
       description:
         'AI är inbäddat i organisationens verksamhet och skalas bortom enstaka pilotprojekt. Det finns en tydlig styrningsmodell, mogna processer och dedikerade team som driver AI-utveckling. Ledningen förstår och kommunicerar AI:s strategiska värde. Organisationen har byggt kompetens på bred front och kan flytta AI-lösningar från utveckling till produktion med förutsägbarhet. EU AI Act-efterlevnad är integrerad i utvecklingsprocessen. Fokus skiftar från att bevisa AI:s värde till att optimera och skala dess påverkan.',
       characteristics:
-        'AI-strategi och färdplan är väl förankrad och styr resursallokering och prioritering. Flera AI-lösningar är i produktion och levererar mätbart affärsvärde. MLOps-praktiker säkerställer modellkvalitet, versionering och övervakning. Ett AI-styrningsramverk hanterar etik, risk och EU AI Act-krav systematiskt. Tvärfunktionella team samarbetar effektivt och det finns etablerade processer för att ta initiativ från idé till produktion. Dataplattformen är robust och stödjer AI-utveckling i stor skala.',
+        'AI-strategi och färdplan är väl förankrad och styr resursallokering och prioritering. Flera AI-lösningar är i produktion och levererar mätbart affärsvärde. Etablerade rutiner säkerställer kvalitet, uppföljning och kontinuerlig förbättring av AI-lösningar i drift. Ett AI-styrningsramverk hanterar etik, risk och EU AI Act-krav systematiskt. Tvärfunktionella team samarbetar effektivt och det finns etablerade processer för att ta initiativ från idé till produktion. Dataplattformen är robust och stödjer AI-utveckling i stor skala.',
       typicalNeeds:
-        'Optimering av AI-operationer för att förbättra effektivitet, kostnad och skalbarhet. Avancerad EU AI Act-implementering inklusive kontinuerlig övervakning och riskbedömning av AI-system i produktion. Strategiskt arbete med att identifiera nästa generations AI-möjligheter och förbereda organisationen. Fördjupad kompetens inom specialistområden som MLOps, AI-säkerhet och förklarbar AI. Kulturförändring som institutionaliserar AI-tänkande i hela verksamheten, inte bara i teknikteamen. Systematisk kunskapsdelning och best practice-spridning.',
+        'Optimering av AI-operationer för att förbättra effektivitet, kostnad och skalbarhet. Avancerad EU AI Act-implementering inklusive kontinuerlig övervakning och riskbedömning av AI-system i produktion. Strategiskt arbete med att identifiera nästa generations AI-möjligheter och förbereda organisationen. Fördjupad kompetens inom specialistområden som AI-säkerhet, hantering av AI i drift och förklarbar AI. Kulturförändring som institutionaliserar AI-tänkande i hela verksamheten, inte bara i teknikteamen. Systematisk kunskapsdelning och best practice-spridning.',
     },
     en: {
       name: 'Scaling',
       description:
         'AI is embedded in the organization\'s operations and is being scaled beyond individual pilot projects. There is a clear governance model, mature processes and dedicated teams driving AI development. Leadership understands and communicates the strategic value of AI. The organization has built broad competence and can move AI solutions from development to production with predictability. EU AI Act compliance is integrated into the development process. Focus shifts from proving AI\'s value to optimizing and scaling its impact.',
       characteristics:
-        'AI strategy and roadmap are well-anchored and guide resource allocation and prioritization. Multiple AI solutions are in production and delivering measurable business value. MLOps practices ensure model quality, versioning and monitoring. An AI governance framework handles ethics, risk and EU AI Act requirements systematically. Cross-functional teams collaborate effectively and there are established processes for taking initiatives from idea to production. The data platform is robust and supports AI development at scale.',
+        'AI strategy and roadmap are well-anchored and guide resource allocation and prioritization. Multiple AI solutions are in production and delivering measurable business value. Established routines ensure quality, monitoring and continuous improvement of AI solutions in production. An AI governance framework handles ethics, risk and EU AI Act requirements systematically. Cross-functional teams collaborate effectively and there are established processes for taking initiatives from idea to production. The data platform is robust and supports AI development at scale.',
       typicalNeeds:
-        'Optimization of AI operations to improve efficiency, cost and scalability. Advanced EU AI Act implementation including continuous monitoring and risk assessment of AI systems in production. Strategic work to identify the next generation of AI opportunities and prepare the organization. Deepened expertise in specialist areas such as MLOps, AI security and explainable AI. Culture change that institutionalizes AI thinking across the entire business, not just in technology teams. Systematic knowledge sharing and best practice dissemination.',
+        'Optimization of AI operations to improve efficiency, cost and scalability. Advanced EU AI Act implementation including continuous monitoring and risk assessment of AI systems in production. Strategic work to identify the next generation of AI opportunities and prepare the organization. Deepened expertise in specialist areas such as AI security, AI operations management and explainable AI. Culture change that institutionalizes AI thinking across the entire business, not just in technology teams. Systematic knowledge sharing and best practice dissemination.',
     },
   },
   {
@@ -452,7 +452,7 @@ export const maturityLevels: MaturityLevel[] = [
       description:
         'AI är en central del av organisationens affärsmodell och strategiska identitet. Organisationen använder AI inte bara för att optimera befintliga processer utan för att skapa helt nya värdeerbjudanden, affärsmodeller och konkurrensfördelar. AI-mognad genomsyrar hela kulturen och alla beslutsnivåer. Organisationen är en förebild inom ansvarsfull AI och har EU AI Act-efterlevnad som en naturlig del av sin verksamhet. Förmågan att anpassa sig till nya AI-genombrott är en kärnkompetens.',
       characteristics:
-        'AI driver strategiska beslut och möjliggör nya affärsmodeller och intäktskällor. Organisationen har en självförstärkande cykel av AI-innovation, datainsamling och lärande. Alla nivåer i organisationen förstår och arbetar aktivt med AI. EU AI Act-efterlevnad och ansvarsfull AI är en konkurrensfördel, inte bara ett krav. Avancerade MLOps-miljöer möjliggör snabb, säker och tillförlitlig modellhantering i stor skala. Organisationen bidrar aktivt till AI-ekosystemet och sätter branschstandarder.',
+        'AI driver strategiska beslut och möjliggör nya affärsmodeller och intäktskällor. Organisationen har en självförstärkande cykel av AI-innovation, datainsamling och lärande. Alla nivåer i organisationen förstår och arbetar aktivt med AI. EU AI Act-efterlevnad och ansvarsfull AI är en konkurrensfördel, inte bara ett krav. Mogna processer och verktyg möjliggör snabb, säker och tillförlitlig hantering av AI-lösningar i stor skala. Organisationen bidrar aktivt till AI-ekosystemet och sätter branschstandarder.',
       typicalNeeds:
         'Kontinuerlig strategisk förnyelse för att behålla ledarposition i en snabbrörlig AI-marknad. Avancerad forskning och utveckling inom framväxande AI-områden som generativ AI, agenter och autonoma system. Proaktivt deltagande i utformningen av framtida AI-reglering och branschstandarder. Mentorskap och kunskapsdelning med partnerorganisationer och det bredare AI-ekosystemet. Arbete med att balansera AI-transformation med organisatorisk hållbarhet och medarbetarnas välbefinnande. Förberedelse för nästa teknologiska paradigmskifte och kontinuerlig omvärldsbevakning.',
     },
@@ -461,7 +461,7 @@ export const maturityLevels: MaturityLevel[] = [
       description:
         'AI is a core part of the organization\'s business model and strategic identity. The organization uses AI not only to optimize existing processes but to create entirely new value propositions, business models and competitive advantages. AI maturity permeates the entire culture and all decision-making levels. The organization is a role model in responsible AI and has EU AI Act compliance as a natural part of its operations. The ability to adapt to new AI breakthroughs is a core competence.',
       characteristics:
-        'AI drives strategic decisions and enables new business models and revenue streams. The organization has a self-reinforcing cycle of AI innovation, data collection and learning. All levels of the organization understand and actively work with AI. EU AI Act compliance and responsible AI are a competitive advantage, not just a requirement. Advanced MLOps environments enable fast, secure and reliable model management at scale. The organization actively contributes to the AI ecosystem and sets industry standards.',
+        'AI drives strategic decisions and enables new business models and revenue streams. The organization has a self-reinforcing cycle of AI innovation, data collection and learning. All levels of the organization understand and actively work with AI. EU AI Act compliance and responsible AI are a competitive advantage, not just a requirement. Mature processes and tools enable fast, secure and reliable management of AI solutions at scale. The organization actively contributes to the AI ecosystem and sets industry standards.',
       typicalNeeds:
         'Continuous strategic renewal to maintain a leadership position in a fast-moving AI market. Advanced research and development in emerging AI areas such as generative AI, agents and autonomous systems. Proactive participation in shaping future AI regulation and industry standards. Mentorship and knowledge sharing with partner organizations and the broader AI ecosystem. Work to balance AI transformation with organizational sustainability and employee well-being. Preparation for the next technological paradigm shift and continuous environmental scanning.',
     },
