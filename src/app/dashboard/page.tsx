@@ -52,8 +52,8 @@ export default function DashboardPage() {
       const data = await res.json();
       if (res.ok) {
         alert(locale === 'sv'
-          ? `Demo-projekt skapat! Gå till rapporten: ${data.reportUrl}`
-          : `Demo project created! Go to the report: ${data.reportUrl}`
+          ? `Två demo-projekt skapade (AI + Digital) med 15 respondenter vardera!`
+          : `Two demo projects created (AI + Digital) with 15 respondents each!`
         );
         fetchProjects();
       } else {

@@ -58,8 +58,8 @@ export default function LoginPage() {
       >
         <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur rounded-2xl p-8 shadow-xl">
           <div className="flex justify-center mb-8">
-            <span className="text-2xl font-bold" style={{ color: '#0f766e' }}>
-              AI-Mognadsmätaren
+            <span className="text-2xl font-bold" style={{ color: '#0d9488' }}>
+              Mognadsmätaren
             </span>
           </div>
 
