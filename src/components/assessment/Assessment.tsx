@@ -1,21 +1,22 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { questions, calculateDimensionScore, calculateOverallScore, getMaturityLevel, dimensions, countNotApplicable } from '@/lib/questions';
+import { getScope, calculateAllDimensionScores, calculateOverallScore, getMaturityLevel } from '@/lib/scopes';
 import { useAssessmentStore, useResultsStore } from '@/lib/store';
 import { QuestionCard } from './QuestionCard';
 import { ProgressBar } from './ProgressBar';
-import type { Dimension } from '@/lib/questions';
 
 interface AssessmentProps {
   onComplete: () => void;
 }
 
 export function Assessment({ onComplete }: AssessmentProps) {
-  const { currentQuestionIndex, setCurrentQuestionIndex, getResponsesMap, locale } = useAssessmentStore();
+  const { currentQuestionIndex, setCurrentQuestionIndex, getResponsesMap, locale, scopeId } = useAssessmentStore();
   const { setResults, setIsLoading } = useResultsStore();
 
+  const scope = useMemo(() => getScope(scopeId), [scopeId]);
+  const questions = scope.questions;
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleNext = useCallback(async () => {
@@ -27,26 +28,27 @@ export function Assessment({ onComplete }: AssessmentProps) {
 
       const responsesMap = getResponsesMap();
 
-      // Calculate dimension scores
-      const dimensionScores = dimensions.reduce((acc, dim) => {
-        acc[dim.id] = calculateDimensionScore(responsesMap, dim.id);
-        return acc;
-      }, {} as Record<Dimension, number>);
+      // Calculate dimension scores using scope config
+      const dimensionScores = calculateAllDimensionScores(responsesMap, scope);
 
-      // Count "Ej aktuellt" responses per dimension
-      const notApplicableCounts = dimensions.reduce((acc, dim) => {
-        acc[dim.id] = countNotApplicable(responsesMap, dim.id);
-        return acc;
-      }, {} as Record<Dimension, number>);
+      // Count "Ej aktuellt" (value 0) responses per dimension
+      const notApplicableCounts: Record<string, number> = {};
+      for (const dim of scope.dimensions) {
+        const dimQuestions = scope.questions.filter((q) => q.dimension === dim.id);
+        notApplicableCounts[dim.id] = dimQuestions
+          .map((q) => responsesMap.get(q.id))
+          .filter((v) => v === 0)
+          .length;
+      }
 
       // Calculate overall score and maturity level
       const overallScore = calculateOverallScore(responsesMap);
-      const maturityLevel = getMaturityLevel(overallScore).level;
+      const maturityLevel = getMaturityLevel(scope.maturityLevels, overallScore).level;
 
       setResults(dimensionScores, overallScore, maturityLevel, notApplicableCounts);
       onComplete();
     }
-  }, [currentQuestionIndex, setCurrentQuestionIndex, getResponsesMap, setResults, setIsLoading, onComplete]);
+  }, [currentQuestionIndex, setCurrentQuestionIndex, getResponsesMap, setResults, setIsLoading, onComplete, questions, scope]);
 
   const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {
@@ -54,18 +56,20 @@ export function Assessment({ onComplete }: AssessmentProps) {
     }
   }, [currentQuestionIndex, setCurrentQuestionIndex]);
 
+  const scopeName = scope.name[locale];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-900/20 pt-4 pb-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-stone-900 dark:text-white mb-2">
-            {locale === 'sv' ? 'AI-Mognadsmätning' : 'AI Maturity Assessment'}
+            {scopeName}
           </h1>
           <p className="text-stone-600 dark:text-stone-400">
             {locale === 'sv'
-              ? 'Svara på frågorna för att bedöma er AI-mognad'
-              : 'Answer the questions to assess your AI maturity'}
+              ? `Svara på frågorna för att bedöma er mognad`
+              : `Answer the questions to assess your maturity`}
           </p>
         </div>
 
@@ -92,8 +96,8 @@ export function Assessment({ onComplete }: AssessmentProps) {
         <div className="mt-6 text-center text-sm text-stone-500 dark:text-stone-400">
           <p>
             {locale === 'sv'
-              ? '💡 Tips: Svara utifrån hur det faktiskt ser ut idag, inte hur ni vill att det ska vara'
-              : '💡 Tip: Answer based on how things actually are today, not how you want them to be'}
+              ? 'Tips: Svara utifrån hur det faktiskt ser ut idag, inte hur ni vill att det ska vara'
+              : 'Tip: Answer based on how things actually are today, not how you want them to be'}
           </p>
         </div>
       </div>

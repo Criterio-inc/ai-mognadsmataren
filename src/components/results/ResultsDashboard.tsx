@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useAssessmentStore, useResultsStore } from '@/lib/store';
+import { getScope } from '@/lib/scopes';
 import { MaturityGauge } from '../visualization/MaturityGauge';
 import { RadarChart } from '../visualization/RadarChart';
 import { MaturitySteps } from '../visualization/MaturitySteps';
@@ -15,8 +16,10 @@ interface ResultsDashboardProps {
 }
 
 export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
-  const { locale, getResponsesMap } = useAssessmentStore();
+  const { locale, scopeId, getResponsesMap } = useAssessmentStore();
   const { dimensionScores, overallScore, maturityLevel, notApplicableCounts, aiInsights, isLoading, setAiInsights, setIsLoading } = useResultsStore();
+
+  const scope = useMemo(() => getScope(scopeId), [scopeId]);
 
   // Fetch AI insights on mount
   useEffect(() => {
@@ -33,6 +36,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             overallScore,
             maturityLevel,
             locale,
+            scopeId,
             notApplicableCounts,
           }),
         });
@@ -49,17 +53,20 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
     };
 
     fetchInsights();
-  }, [dimensionScores, overallScore, maturityLevel, locale, aiInsights, setAiInsights, setIsLoading]);
+  }, [dimensionScores, overallScore, maturityLevel, locale, scopeId, aiInsights, setAiInsights, setIsLoading]);
 
   if (!dimensionScores || !overallScore || !maturityLevel) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">
+        <p className="text-stone-500">
           {locale === 'sv' ? 'Laddar resultat...' : 'Loading results...'}
         </p>
       </div>
     );
   }
+
+  const scopeName = scope.name[locale];
+  const dimCount = scope.dimensions.length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-900/20 pt-4 pb-8 px-4">
@@ -71,12 +78,12 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           className="text-center mb-12"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-2">
-            {locale === 'sv' ? 'Ert AI-mognadsresultat' : 'Your AI maturity results'}
+            {locale === 'sv' ? `Ert mognadsresultat` : `Your maturity results`}
           </h1>
           <p className="text-stone-600 dark:text-stone-400">
             {locale === 'sv'
-              ? 'AI-mognadsbedömning baserad på 8 strategiska dimensioner'
-              : 'AI maturity assessment based on 8 strategic dimensions'}
+              ? `${scopeName} – bedömning baserad på ${dimCount} strategiska dimensioner`
+              : `${scopeName} – assessment based on ${dimCount} strategic dimensions`}
           </p>
         </motion.div>
 
@@ -90,9 +97,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
             <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
-              {locale === 'sv' ? 'Övergripande AI-mognadsnivå' : 'Overall AI maturity level'}
+              {locale === 'sv' ? 'Övergripande mognadsnivå' : 'Overall maturity level'}
             </h2>
-            <MaturityGauge score={overallScore} locale={locale} />
+            <MaturityGauge score={overallScore} locale={locale} maturityLevels={scope.maturityLevels} />
           </motion.div>
 
           {/* Radar card */}
@@ -106,7 +113,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
               {locale === 'sv' ? 'Dimensionsanalys' : 'Dimension analysis'}
             </h2>
             <div className="flex justify-center">
-              <RadarChart scores={dimensionScores} locale={locale} />
+              <RadarChart scores={dimensionScores} locale={locale} dimensions={scope.dimensions} />
             </div>
           </motion.div>
         </div>
@@ -119,14 +126,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
         >
           <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
-            {locale === 'sv' ? 'AI-mognadsresan' : 'AI maturity journey'}
+            {locale === 'sv' ? 'Mognadsresan' : 'Maturity journey'}
           </h2>
-          <p className="text-stone-500 dark:text-stone-400 text-center mb-4 text-sm">
-            {locale === 'sv'
-              ? '"AI-mognad är inte en teknikfråga – det är en ledningsfråga"'
-              : '"AI maturity is not a technology question – it\'s a leadership question"'}
-          </p>
-          <MaturitySteps currentLevel={maturityLevel} locale={locale} />
+          <MaturitySteps currentLevel={maturityLevel} locale={locale} maturityLevels={scope.maturityLevels} />
         </motion.div>
 
         {/* Dimension details */}
@@ -139,7 +141,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
             {locale === 'sv' ? 'Dimensioner i detalj' : 'Dimensions in detail'}
           </h2>
-          <DimensionBars scores={dimensionScores} locale={locale} notApplicableCounts={notApplicableCounts || undefined} />
+          <DimensionBars scores={dimensionScores} locale={locale} dimensions={scope.dimensions} notApplicableCounts={notApplicableCounts || undefined} />
         </motion.div>
 
         {/* AI Insights */}

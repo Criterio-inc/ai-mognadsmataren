@@ -1,24 +1,27 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Dimension } from './questions';
+import type { ScopeId } from './scopes';
 
 interface AssessmentState {
   responses: Record<number, number>;
   currentQuestionIndex: number;
   locale: 'sv' | 'en';
+  scopeId: ScopeId;
   setResponse: (questionId: number, value: number) => void;
   setCurrentQuestionIndex: (index: number) => void;
   setLocale: (locale: 'sv' | 'en') => void;
+  setScopeId: (scopeId: ScopeId) => void;
   reset: () => void;
   getResponsesMap: () => Map<number, number>;
-  isComplete: () => boolean;
-  getProgress: () => number;
+  isComplete: (totalQuestions: number) => boolean;
+  getProgress: (totalQuestions: number) => number;
 }
 
 const initialState = {
   responses: {},
   currentQuestionIndex: 0,
   locale: 'sv' as const,
+  scopeId: 'ai' as ScopeId,
 };
 
 export const useAssessmentStore = create<AssessmentState>()(
@@ -32,19 +35,21 @@ export const useAssessmentStore = create<AssessmentState>()(
       setCurrentQuestionIndex: (index) =>
         set({ currentQuestionIndex: index }),
       setLocale: (locale) => set({ locale }),
+      setScopeId: (scopeId) => set({ scopeId, responses: {}, currentQuestionIndex: 0 }),
       reset: () => set(initialState),
       getResponsesMap: () => new Map(Object.entries(get().responses).map(
         ([k, v]) => [parseInt(k), v]
       )),
-      isComplete: () => Object.keys(get().responses).length === 32,
-      getProgress: () => (Object.keys(get().responses).length / 32) * 100,
+      isComplete: (totalQuestions) => Object.keys(get().responses).length === totalQuestions,
+      getProgress: (totalQuestions) => (Object.keys(get().responses).length / totalQuestions) * 100,
     }),
     {
-      name: 'ai-maturity-assessment',
+      name: 'maturity-assessment',
       partialize: (state) => ({
         responses: state.responses,
         currentQuestionIndex: state.currentQuestionIndex,
         locale: state.locale,
+        scopeId: state.scopeId,
       }),
     }
   )
@@ -52,10 +57,10 @@ export const useAssessmentStore = create<AssessmentState>()(
 
 // Results store
 interface ResultsState {
-  dimensionScores: Record<Dimension, number> | null;
+  dimensionScores: Record<string, number> | null;
   overallScore: number | null;
   maturityLevel: number | null;
-  notApplicableCounts: Record<Dimension, number> | null;
+  notApplicableCounts: Record<string, number> | null;
   aiInsights: {
     summary: string;
     strengths: string[];
@@ -64,7 +69,7 @@ interface ResultsState {
     nextSteps: string[];
   } | null;
   isLoading: boolean;
-  setResults: (dimensionScores: Record<Dimension, number>, overallScore: number, maturityLevel: number, notApplicableCounts?: Record<Dimension, number>) => void;
+  setResults: (dimensionScores: Record<string, number>, overallScore: number, maturityLevel: number, notApplicableCounts?: Record<string, number>) => void;
   setAiInsights: (insights: ResultsState['aiInsights']) => void;
   setIsLoading: (loading: boolean) => void;
   reset: () => void;

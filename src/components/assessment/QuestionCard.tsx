@@ -1,11 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Question, getDimensionById } from '@/lib/questions';
+import { getScope } from '@/lib/scopes';
+import type { ScopeQuestion } from '@/lib/scopes';
 import { useAssessmentStore } from '@/lib/store';
 
 interface QuestionCardProps {
-  question: Question;
+  question: ScopeQuestion;
   questionNumber: number;
   totalQuestions: number;
   onNext: () => void;
@@ -45,9 +46,10 @@ export function QuestionCard({
   isFirst,
   isLast,
 }: QuestionCardProps) {
-  const { responses, setResponse, locale } = useAssessmentStore();
+  const { responses, setResponse, locale, scopeId } = useAssessmentStore();
   const currentValue = responses[question.id];
-  const dimension = getDimensionById(question.dimension);
+  const scope = getScope(scopeId);
+  const dimension = scope.dimensions.find((d) => d.id === question.dimension);
 
   const handleSelect = (value: number) => {
     setResponse(question.id, value);

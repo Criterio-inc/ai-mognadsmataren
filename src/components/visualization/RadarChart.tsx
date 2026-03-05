@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { dimensions, type Dimension } from '@/lib/questions';
+import type { ScopeDimension } from '@/lib/scopes';
 
 interface RadarChartProps {
-  scores: Record<Dimension, number>;
+  scores: Record<string, number>;
   locale: 'sv' | 'en';
   size?: number;
+  dimensions: ScopeDimension[];
 }
 
-export function RadarChart({ scores, locale, size = 300 }: RadarChartProps) {
-  const [animatedScores, setAnimatedScores] = useState<Record<Dimension, number>>(
-    dimensions.reduce((acc, d) => ({ ...acc, [d.id]: 0 }), {} as Record<Dimension, number>)
+export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChartProps) {
+  const [animatedScores, setAnimatedScores] = useState<Record<string, number>>(
+    dimensions.reduce((acc, d) => ({ ...acc, [d.id]: 0 }), {} as Record<string, number>)
   );
 
   useEffect(() => {

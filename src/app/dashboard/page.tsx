@@ -13,6 +13,7 @@ interface Project {
   clientName: string;
   clientDomain: string;
   shareCode: string;
+  scope: 'ai' | 'digital';
   status: 'draft' | 'active' | 'closed';
   deadline: string | null;
   createdAt: string;
@@ -178,11 +179,22 @@ export default function DashboardPage() {
                     {project.clientName}
                   </p>
                 </div>
-                <span
-                  className={`px-2 py-1 text-xs font-medium rounded-full ${statusColors[project.status]}`}
-                >
-                  {statusLabels[project.status]}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`px-2 py-0.5 text-xs font-medium rounded ${
+                      project.scope === 'ai'
+                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
+                        : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                    }`}
+                  >
+                    {project.scope === 'ai' ? 'AI' : 'Digital'}
+                  </span>
+                  <span
+                    className={`px-2 py-1 text-xs font-medium rounded-full ${statusColors[project.status]}`}
+                  >
+                    {statusLabels[project.status]}
+                  </span>
+                </div>
               </div>
 
               <div className="space-y-2 mb-4">

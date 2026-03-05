@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { maturityLevels } from '@/lib/questions';
+import type { ScopeMaturityLevel } from '@/lib/scopes';
 import { Search, FlaskConical, FileCheck, Scaling, Sparkles } from 'lucide-react';
 
 interface MaturityStepsProps {
   currentLevel: number; // 1-5
   locale: 'sv' | 'en';
+  maturityLevels: ScopeMaturityLevel[];
 }
 
 const levelIcons = [Search, FlaskConical, FileCheck, Scaling, Sparkles];
@@ -18,7 +19,7 @@ const levelColors = [
   'from-lime-500 to-green-600',
 ];
 
-export function MaturitySteps({ currentLevel, locale }: MaturityStepsProps) {
+export function MaturitySteps({ currentLevel, locale, maturityLevels }: MaturityStepsProps) {
   return (
     <div className="w-full max-w-4xl mx-auto py-8">
       {/* Steps */}

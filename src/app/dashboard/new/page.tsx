@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Building2, Globe, FileText } from 'lucide-react';
+import { ArrowLeft, Calendar, Building2, Globe, FileText, Brain, Monitor } from 'lucide-react';
 import { useAssessmentStore } from '@/lib/store';
 import { getTranslations } from '@/lib/translations';
+import { getAllScopes } from '@/lib/scopes';
+import type { ScopeId } from '@/lib/scopes';
 
 export default function NewProjectPage() {
   const router = useRouter();
@@ -17,6 +19,9 @@ export default function NewProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const scopes = getAllScopes();
+
+  const [selectedScope, setSelectedScope] = useState<ScopeId>('ai');
   const [formData, setFormData] = useState({
     name: '',
     clientName: '',
@@ -34,6 +39,7 @@ export default function NewProjectPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...formData,
+        scope: selectedScope,
         status: 'active',
       }),
     });
@@ -78,6 +84,41 @@ export default function NewProjectPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Scope selector */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
+              {locale === 'sv' ? 'Typ av mätning' : 'Assessment type'}
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              {scopes.map((scope) => {
+                const isSelected = selectedScope === scope.id;
+                const Icon = scope.id === 'ai' ? Brain : Monitor;
+                return (
+                  <button
+                    key={scope.id}
+                    type="button"
+                    onClick={() => setSelectedScope(scope.id as ScopeId)}
+                    className={`flex flex-col items-start p-4 rounded-lg border-2 transition-all text-left ${
+                      isSelected
+                        ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
+                        : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Icon className={`w-5 h-5 ${isSelected ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400'}`} />
+                      <span className={`font-medium ${isSelected ? 'text-teal-700 dark:text-teal-300' : 'text-slate-700 dark:text-slate-300'}`}>
+                        {scope.name[locale]}
+                      </span>
+                    </div>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                      {scope.questionCount} {locale === 'sv' ? 'frågor' : 'questions'} &middot; {scope.dimensionCount} {locale === 'sv' ? 'dimensioner' : 'dimensions'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <div>
             <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
               <FileText className="w-4 h-4" />

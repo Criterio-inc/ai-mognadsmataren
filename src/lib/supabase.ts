@@ -1,9 +1,25 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+let _supabase: ReturnType<typeof createBrowserClient> | null = null;
 
-export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
+export function getSupabaseClient() {
+  if (!_supabase) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !key) {
+      throw new Error('Supabase URL and anon key must be set in environment variables');
+    }
+    _supabase = createBrowserClient(url, key);
+  }
+  return _supabase;
+}
+
+// Lazy proxy so module can be imported without env vars being set (build-time)
+export const supabase = new Proxy({} as ReturnType<typeof createBrowserClient>, {
+  get(_target, prop) {
+    return (getSupabaseClient() as Record<string | symbol, unknown>)[prop];
+  },
+});
 
 // Allowed email domains for consultants
 const ALLOWED_DOMAINS = ['curago.se', 'criteroconsulting.se'];

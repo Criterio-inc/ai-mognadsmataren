@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, AlertCircle, Mail, User, Globe, Home } from 'lucide-react';
-import { questions, dimensions } from '@/lib/questions';
+import { getScope } from '@/lib/scopes';
+import type { ScopeQuestion, ScopeDimension } from '@/lib/scopes';
 import { getTranslations, type Locale } from '@/lib/translations';
 
 type Step = 'loading' | 'error' | 'closed' | 'email' | 'assessment' | 'completed';
@@ -14,6 +15,7 @@ interface ProjectInfo {
   name: string;
   clientName: string;
   clientDomain: string;
+  scope: string;
 }
 
 export default function SurveyPage() {
@@ -34,6 +36,19 @@ export default function SurveyPage() {
   const [responses, setResponses] = useState<Record<number, number>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Load scope-specific questions and dimensions
+  const scope = useMemo(() => {
+    if (!project?.scope) return null;
+    try {
+      return getScope(project.scope);
+    } catch {
+      return getScope('ai'); // fallback
+    }
+  }, [project?.scope]);
+
+  const questions: ScopeQuestion[] = scope?.questions ?? [];
+  const dimensions: ScopeDimension[] = scope?.dimensions ?? [];
 
   useEffect(() => {
     fetchProject();
@@ -117,9 +132,12 @@ export default function SurveyPage() {
 
   const currentQuestion = questions[currentQuestionIndex];
   const currentDimension = dimensions.find((d) => d.id === currentQuestion?.dimension);
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const progress = questions.length > 0 ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
   const allAnswered = Object.keys(responses).length === questions.length;
+
+  // Scope-aware branding
+  const scopeName = scope?.name[locale] ?? (locale === 'sv' ? 'Mognadsmätaren' : 'Maturity Meter');
 
   // Rating scale labels
   const ratingLabels = [
@@ -155,10 +173,10 @@ export default function SurveyPage() {
     </button>
   );
 
-  // Header text component
+  // Header text component - scope-aware
   const HeaderText = ({ className = '' }: { className?: string }) => (
     <span className={`font-bold ${className}`} style={{ color: '#c96442' }}>
-      {locale === 'sv' ? 'AI-Mognadsmätaren' : 'AI Maturity Meter'}
+      {scopeName}
     </span>
   );
 
@@ -252,7 +270,7 @@ export default function SurveyPage() {
               {project?.name}
             </h1>
             <p className="text-stone-500 dark:text-stone-400 text-center mb-8">
-              {t.digitalMaturityFor} {project?.clientName}
+              {locale === 'sv' ? 'Mognadsmätning för' : 'Maturity assessment for'} {project?.clientName}
             </p>
 
             {errorMessage && (

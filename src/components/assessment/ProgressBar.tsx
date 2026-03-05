@@ -1,13 +1,18 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useAssessmentStore } from '@/lib/store';
-import { dimensions } from '@/lib/questions';
+import { getScope } from '@/lib/scopes';
 
 export function ProgressBar() {
-  const { responses, locale } = useAssessmentStore();
+  const { responses, locale, scopeId } = useAssessmentStore();
+  const scope = useMemo(() => getScope(scopeId), [scopeId]);
+  const dimensions = scope.dimensions;
+  const totalQuestions = scope.questionCount;
+
   const answeredCount = Object.keys(responses).length;
-  const progress = (answeredCount / 32) * 100;
+  const progress = (answeredCount / totalQuestions) * 100;
 
   return (
     <div className="w-full max-w-2xl mx-auto mb-8">
@@ -17,7 +22,7 @@ export function ProgressBar() {
           <span>
             {locale === 'sv' ? 'Framsteg' : 'Progress'}
           </span>
-          <span>{answeredCount}/32</span>
+          <span>{answeredCount}/{totalQuestions}</span>
         </div>
         <div className="h-2 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
           <motion.div

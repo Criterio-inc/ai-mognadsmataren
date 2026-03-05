@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
       name: projects.name,
       clientName: projects.clientName,
       clientDomain: projects.clientDomain,
+      scope: projects.scope,
       status: projects.status,
       deadline: projects.deadline,
     })
@@ -41,6 +42,7 @@ export async function GET(req: NextRequest) {
     name: project.name,
     clientName: project.clientName,
     clientDomain: project.clientDomain,
+    scope: project.scope,
   });
 }
 

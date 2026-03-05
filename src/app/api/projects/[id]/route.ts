@@ -3,6 +3,7 @@ import { createSupabaseServerClient } from '@/lib/supabase-server';
 import { db } from '@/db';
 import { projects, assessmentSessions, assessmentResults } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
+import { getScope } from '@/lib/scopes';
 
 type Params = Promise<{ id: string }>;
 
@@ -43,10 +44,9 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
   let aggregatedScores = null;
 
   if (completedSessions.length > 0) {
-    const dimensions = [
-      'strategiLedarskap', 'anvandsfall', 'dataInfrastruktur', 'kompetensKultur',
-      'styrningEtik', 'teknikArkitektur', 'organisationProcesser', 'ekosystemInnovation',
-    ] as const;
+    // Get dimension keys from scope config
+    const scope = getScope(project.scope);
+    const dimensionIds = scope.dimensions.map((d) => d.id);
 
     aggregatedScores = {
       dimensionScores: {} as Record<string, number>,
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
       responseCount: completedSessions.length,
     };
 
-    for (const dim of dimensions) {
+    for (const dim of dimensionIds) {
       const sum = completedSessions.reduce((acc, s) => {
         const scores = s.result?.dimensionScores as Record<string, number> | null;
         return acc + (scores?.[dim] || 0);

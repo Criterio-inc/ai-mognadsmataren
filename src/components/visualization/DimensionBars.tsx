@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { dimensions, type Dimension } from '@/lib/questions';
+import type { ScopeDimension } from '@/lib/scopes';
 
 interface DimensionBarsProps {
-  scores: Record<Dimension, number>;
+  scores: Record<string, number>;
   locale: 'sv' | 'en';
-  notApplicableCounts?: Record<Dimension, number>;
+  dimensions: ScopeDimension[];
+  notApplicableCounts?: Record<string, number>;
 }
 
 const barColors = [
@@ -20,14 +21,15 @@ const barColors = [
   'from-violet-400 to-violet-600',
 ];
 
-export function DimensionBars({ scores, locale, notApplicableCounts }: DimensionBarsProps) {
+export function DimensionBars({ scores, locale, dimensions, notApplicableCounts }: DimensionBarsProps) {
   return (
     <div className="space-y-6">
       {dimensions.map((dim, index) => {
         const score = scores[dim.id] || 0;
         const percentage = (score / 5) * 100;
         const naCount = notApplicableCounts?.[dim.id] || 0;
-        const allNa = naCount === 4;
+        const questionsPerDim = dim.questionIds.length;
+        const allNa = naCount === questionsPerDim && questionsPerDim > 0;
 
         return (
           <motion.div
@@ -65,7 +67,7 @@ export function DimensionBars({ scores, locale, notApplicableCounts }: Dimension
             {/* Bar */}
             <div className="h-4 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
               <motion.div
-                className={`h-full bg-gradient-to-r ${allNa ? 'from-stone-300 to-stone-400 dark:from-stone-600 dark:to-stone-500' : barColors[index]} rounded-full`}
+                className={`h-full bg-gradient-to-r ${allNa ? 'from-stone-300 to-stone-400 dark:from-stone-600 dark:to-stone-500' : barColors[index % barColors.length]} rounded-full`}
                 initial={{ width: 0 }}
                 animate={{ width: allNa ? '0%' : `${percentage}%` }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1, ease: 'easeOut' }}
@@ -91,8 +93,8 @@ export function DimensionBars({ scores, locale, notApplicableCounts }: Dimension
               {naCount > 0 && !allNa && (
                 <span className="text-xs text-stone-400 dark:text-stone-500 ml-2 whitespace-nowrap">
                   {locale === 'sv'
-                    ? `${naCount} av 4 ej aktuellt`
-                    : `${naCount} of 4 N/A`}
+                    ? `${naCount} av ${questionsPerDim} ej aktuellt`
+                    : `${naCount} of ${questionsPerDim} N/A`}
                 </span>
               )}
             </div>

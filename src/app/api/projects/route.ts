@@ -23,6 +23,7 @@ export async function GET() {
       clientName: projects.clientName,
       clientDomain: projects.clientDomain,
       shareCode: projects.shareCode,
+      scope: projects.scope,
       status: projects.status,
       deadline: projects.deadline,
       createdAt: projects.createdAt,
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { name, clientName, clientDomain, deadline, status } = body;
+  const { name, clientName, clientDomain, deadline, status, scope } = body;
 
   if (!name || !clientName || !clientDomain) {
     return NextResponse.json(
@@ -57,6 +58,10 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
+
+  // Validate scope
+  const validScopes = ['ai', 'digital'];
+  const projectScope = validScopes.includes(scope) ? scope : 'ai';
 
   // Clean up client domain (remove @ if provided)
   const cleanDomain = clientDomain.replace('@', '').toLowerCase();
@@ -71,6 +76,7 @@ export async function POST(req: NextRequest) {
       clientDomain: cleanDomain,
       shareCode,
       createdById: user.id,
+      scope: projectScope,
       deadline: deadline ? new Date(deadline) : null,
       status: status || 'active',
     })

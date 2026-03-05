@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { maturityLevels } from '@/lib/questions';
+import type { ScopeMaturityLevel } from '@/lib/scopes';
 
 interface MaturityGaugeProps {
   score: number; // 1-5
   locale: 'sv' | 'en';
+  maturityLevels: ScopeMaturityLevel[];
 }
 
-export function MaturityGauge({ score, locale }: MaturityGaugeProps) {
+export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugeProps) {
   const [animatedScore, setAnimatedScore] = useState(1);
 
   useEffect(() => {

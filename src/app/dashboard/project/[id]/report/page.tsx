@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   Download,
-  Loader2,
   Users,
   Calendar,
 } from 'lucide-react';
@@ -19,7 +18,7 @@ import { AIInsightsCard } from '@/components/results/AIInsightsCard';
 import { formatDate } from '@/lib/utils';
 import { useAssessmentStore } from '@/lib/store';
 import { getTranslations } from '@/lib/translations';
-import type { Dimension } from '@/lib/questions';
+import { getScope } from '@/lib/scopes';
 
 interface Project {
   id: string;
@@ -27,13 +26,14 @@ interface Project {
   clientName: string;
   clientDomain: string;
   shareCode: string;
+  scope: string;
   status: 'draft' | 'active' | 'closed';
   deadline: string | null;
   createdAt: string;
 }
 
 interface AggregatedScores {
-  dimensionScores: Record<Dimension, number>;
+  dimensionScores: Record<string, number>;
   overallScore: number;
   responseCount: number;
 }
@@ -68,6 +68,16 @@ export default function ProjectReportPage() {
   const [isPrintMode, setIsPrintMode] = useState(false);
   const reportRef = useRef<HTMLDivElement>(null);
 
+  // Load scope config based on project scope
+  const scope = useMemo(() => {
+    if (!data?.project?.scope) return null;
+    try {
+      return getScope(data.project.scope);
+    } catch {
+      return getScope('ai');
+    }
+  }, [data?.project?.scope]);
+
   useEffect(() => {
     fetchProject();
   }, [params.id]);
@@ -80,13 +90,13 @@ export default function ProjectReportPage() {
 
       // Fetch AI insights if there are aggregated scores
       if (projectData.aggregatedScores) {
-        fetchAIInsights(projectData.aggregatedScores);
+        fetchAIInsights(projectData.aggregatedScores, projectData.project.scope);
       }
     }
     setIsLoading(false);
   }
 
-  async function fetchAIInsights(scores: AggregatedScores) {
+  async function fetchAIInsights(scores: AggregatedScores, scopeId: string) {
     setIsLoadingInsights(true);
     try {
       const maturityLevel = Math.round(scores.overallScore);
@@ -98,6 +108,7 @@ export default function ProjectReportPage() {
           overallScore: scores.overallScore,
           maturityLevel,
           locale,
+          scopeId,
         }),
       });
       if (res.ok) {
@@ -173,11 +184,6 @@ export default function ProjectReportPage() {
   }
 
   const maturityLevel = Math.round(aggregatedScores.overallScore);
-
-  // Quote translation
-  const quote = locale === 'sv'
-    ? '"AI-mognad är inte en teknikfråga – det är en ledningsfråga"'
-    : '"AI maturity is not a technology question – it\'s a leadership question"';
 
   // Collection ended translation
   const collectionEnded = locale === 'sv'
@@ -267,62 +273,63 @@ export default function ProjectReportPage() {
         </div>
 
         {/* Main gauge and radar */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
-          >
-            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
-              {t.overallMaturityLevel}
-            </h2>
-            <MaturityGauge score={aggregatedScores.overallScore} locale={locale} />
-          </motion.div>
+        {scope && (
+          <>
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
+              >
+                <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
+                  {t.overallMaturityLevel}
+                </h2>
+                <MaturityGauge score={aggregatedScores.overallScore} locale={locale} maturityLevels={scope.maturityLevels} />
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
-          >
-            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
-              {t.dimensionAnalysis}
-            </h2>
-            <div className="flex justify-center">
-              <RadarChart scores={aggregatedScores.dimensionScores} locale={locale} />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
+              >
+                <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
+                  {t.dimensionAnalysis}
+                </h2>
+                <div className="flex justify-center">
+                  <RadarChart scores={aggregatedScores.dimensionScores} locale={locale} dimensions={scope.dimensions} />
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
-        </div>
 
-        {/* Maturity steps */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
-        >
-          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
-            {t.maturityJourney}
-          </h2>
-          <p className="text-stone-500 dark:text-stone-400 text-center mb-4 text-sm">
-            {quote}
-          </p>
-          <MaturitySteps currentLevel={maturityLevel} locale={locale} />
-        </motion.div>
+            {/* Maturity steps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
+            >
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
+                {t.maturityJourney}
+              </h2>
+              <MaturitySteps currentLevel={maturityLevel} locale={locale} maturityLevels={scope.maturityLevels} />
+            </motion.div>
 
-        {/* Dimension details */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
-        >
-          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
-            {t.dimensionsInDetail}
-          </h2>
-          <DimensionBars scores={aggregatedScores.dimensionScores} locale={locale} />
-        </motion.div>
+            {/* Dimension details */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8"
+            >
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
+                {t.dimensionsInDetail}
+              </h2>
+              <DimensionBars scores={aggregatedScores.dimensionScores} locale={locale} dimensions={scope.dimensions} />
+            </motion.div>
+          </>
+        )}
 
         {/* AI Insights */}
         <motion.div

@@ -4,8 +4,9 @@ import { relations } from 'drizzle-orm';
 // Enums
 export const localeEnum = pgEnum('locale', ['sv', 'en']);
 export const projectStatusEnum = pgEnum('project_status', ['draft', 'active', 'closed']);
+export const scopeEnum = pgEnum('scope', ['ai', 'digital']);
 
-// Projects (created by Curago consultants for clients)
+// Projects (created by Critero consultants for clients)
 // Note: createdById references Supabase Auth user ID (UUID)
 export const projects = pgTable('projects', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -14,6 +15,7 @@ export const projects = pgTable('projects', {
   clientDomain: text('client_domain').notNull(), // "volvo.se" - for email validation
   shareCode: text('share_code').notNull().unique(), // Short unique code for URL
   createdById: text('created_by_id').notNull(), // Supabase Auth user ID
+  scope: scopeEnum('scope').default('ai').notNull(), // Assessment type: 'ai' or 'digital'
   status: projectStatusEnum('status').default('draft').notNull(),
   deadline: timestamp('deadline'), // When the survey closes
   createdAt: timestamp('created_at').defaultNow().notNull(),
@@ -34,7 +36,7 @@ export const assessmentSessions = pgTable('assessment_sessions', {
 export const responses = pgTable('responses', {
   id: uuid('id').defaultRandom().primaryKey(),
   sessionId: uuid('session_id').notNull().references(() => assessmentSessions.id, { onDelete: 'cascade' }),
-  questionId: integer('question_id').notNull(), // Maps to question number 1-32
+  questionId: integer('question_id').notNull(), // Maps to question number in scope
   value: integer('value').notNull(), // 1-5 scale
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
@@ -44,17 +46,8 @@ export const assessmentResults = pgTable('assessment_results', {
   id: uuid('id').defaultRandom().primaryKey(),
   sessionId: uuid('session_id').notNull().references(() => assessmentSessions.id, { onDelete: 'cascade' }).unique(),
 
-  // Dimension scores (averages)
-  dimensionScores: jsonb('dimension_scores').notNull().$type<{
-    strategiLedarskap: number;       // Q1-4
-    anvandsfall: number;             // Q5-8
-    dataInfrastruktur: number;       // Q9-12
-    kompetensKultur: number;         // Q13-16
-    styrningEtik: number;            // Q17-20
-    teknikArkitektur: number;        // Q21-24
-    organisationProcesser: number;   // Q25-28
-    ekosystemInnovation: number;     // Q29-32
-  }>(),
+  // Dimension scores (averages) - keys depend on project scope
+  dimensionScores: jsonb('dimension_scores').notNull().$type<Record<string, number>>(),
 
   // Overall maturity level (1-5)
   overallScore: integer('overall_score').notNull(),

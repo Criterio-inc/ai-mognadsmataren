@@ -10,6 +10,7 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAssessmentStore, useResultsStore } from '@/lib/store';
 import { getTranslations } from '@/lib/translations';
+import type { ScopeId } from '@/lib/scopes';
 
 type View = 'landing' | 'assessment' | 'results';
 
@@ -18,6 +19,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const locale = useAssessmentStore((state) => state.locale);
   const resetAssessment = useAssessmentStore((state) => state.reset);
+  const setScopeId = useAssessmentStore((state) => state.setScopeId);
   const resetResults = useResultsStore((state) => state.reset);
   const tCommon = getTranslations('common', locale);
 
@@ -26,9 +28,10 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  const handleStartAssessment = () => {
+  const handleStartAssessment = (scopeId: ScopeId) => {
     resetAssessment();
     resetResults();
+    setScopeId(scopeId);
     setView('assessment');
   };
 
