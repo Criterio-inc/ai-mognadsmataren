@@ -4,12 +4,12 @@ export const digitalScope: AssessmentScope = {
   id: 'digital',
   name: { sv: 'Digital mognad', en: 'Digital Maturity' },
   description: {
-    sv: 'Mät er ledningsgrupps digitala mognad inom 4 dimensioner med 22 frågor',
-    en: 'Measure your leadership team\'s digital maturity across 4 dimensions with 22 questions',
+    sv: 'Bedöm ledningsgruppens gemensamma förståelse, strategiska koppling och genomförandeförmåga',
+    en: 'Assess leadership team alignment, strategic connection and execution capability',
   },
   targetAudience: {
-    sv: 'Ledningsgrupper (offentlig sektor)',
-    en: 'Leadership teams (public sector)',
+    sv: 'Ledningsgrupper och styrgrupper',
+    en: 'Leadership teams and steering committees',
   },
   questionCount: 22,
   dimensionCount: 4,

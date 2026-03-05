@@ -4,12 +4,12 @@ export const aiScope: AssessmentScope = {
   id: 'ai',
   name: { sv: 'AI-mognad', en: 'AI Maturity' },
   description: {
-    sv: 'Mät er organisations AI-mognad inom 8 dimensioner med 32 frågor',
-    en: 'Measure your organization\'s AI maturity across 8 dimensions with 32 questions',
+    sv: 'Kartlägg organisationens förmåga att använda AI strategiskt, ansvarsfullt och skalbart',
+    en: 'Map your organization\'s ability to use AI strategically, responsibly and at scale',
   },
   targetAudience: {
-    sv: 'Organisationer (privat & offentlig sektor)',
-    en: 'Organizations (private & public sector)',
+    sv: 'Ledningsgrupper och beslutsfattare',
+    en: 'Leadership teams and decision-makers',
   },
   questionCount: 32,
   dimensionCount: 8,
