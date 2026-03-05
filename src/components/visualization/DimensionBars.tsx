@@ -41,33 +41,33 @@ export function DimensionBars({ scores, locale, dimensions, notApplicableCounts 
             {/* Header */}
             <div className="flex justify-between items-baseline mb-2">
               <div>
-                <h4 className="font-medium text-stone-900 dark:text-white">
+                <h4 className="font-medium text-slate-900 dark:text-white">
                   {dim[locale].name}
                 </h4>
-                <p className="text-xs text-stone-500 dark:text-stone-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   {dim[locale].description}
                 </p>
               </div>
               <div className="text-right">
                 {allNa ? (
-                  <span className="text-sm font-medium text-stone-400 dark:text-stone-500">
+                  <span className="text-sm font-medium text-slate-400 dark:text-slate-500">
                     {locale === 'sv' ? 'Ej aktuellt' : 'N/A'}
                   </span>
                 ) : (
                   <>
-                    <span className="text-2xl font-bold text-stone-900 dark:text-white">
+                    <span className="text-2xl font-bold text-slate-900 dark:text-white">
                       {score.toFixed(1)}
                     </span>
-                    <span className="text-sm text-stone-500 dark:text-stone-400">/5</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400">/5</span>
                   </>
                 )}
               </div>
             </div>
 
             {/* Bar */}
-            <div className="h-4 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
+            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
               <motion.div
-                className={`h-full bg-gradient-to-r ${allNa ? 'from-stone-300 to-stone-400 dark:from-stone-600 dark:to-stone-500' : barColors[index % barColors.length]} rounded-full`}
+                className={`h-full bg-gradient-to-r ${allNa ? 'from-slate-300 to-slate-400 dark:from-slate-600 dark:to-slate-500' : barColors[index % barColors.length]} rounded-full`}
                 initial={{ width: 0 }}
                 animate={{ width: allNa ? '0%' : `${percentage}%` }}
                 transition={{ duration: 0.8, delay: 0.2 + index * 0.1, ease: 'easeOut' }}
@@ -82,8 +82,8 @@ export function DimensionBars({ scores, locale, dimensions, notApplicableCounts 
                     key={n}
                     className={`text-xs ${
                       score >= n
-                        ? 'text-stone-600 dark:text-stone-400'
-                        : 'text-stone-300 dark:text-stone-600'
+                        ? 'text-slate-600 dark:text-slate-400'
+                        : 'text-slate-300 dark:text-slate-600'
                     }`}
                   >
                     {n}
@@ -91,7 +91,7 @@ export function DimensionBars({ scores, locale, dimensions, notApplicableCounts 
                 ))}
               </div>
               {naCount > 0 && !allNa && (
-                <span className="text-xs text-stone-400 dark:text-stone-500 ml-2 whitespace-nowrap">
+                <span className="text-xs text-slate-400 dark:text-slate-500 ml-2 whitespace-nowrap">
                   {locale === 'sv'
                     ? `${naCount} av ${questionsPerDim} ej aktuellt`
                     : `${naCount} of ${questionsPerDim} N/A`}

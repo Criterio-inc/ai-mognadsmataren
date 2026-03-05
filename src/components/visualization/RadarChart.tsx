@@ -63,7 +63,7 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
             fill="none"
             stroke="currentColor"
             strokeWidth="1"
-            className="text-stone-200 dark:text-stone-700"
+            className="text-slate-200 dark:text-slate-700"
           />
         ))}
 
@@ -79,7 +79,7 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
               y2={endPoint.y}
               stroke="currentColor"
               strokeWidth="1"
-              className="text-stone-300 dark:text-stone-600"
+              className="text-slate-300 dark:text-slate-600"
             />
           );
         })}
@@ -87,8 +87,8 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
         {/* Data polygon */}
         <motion.path
           d={dataPath}
-          fill="rgba(201, 100, 66, 0.3)"
-          stroke="#c96442"
+          fill="rgba(13, 148, 136, 0.25)"
+          stroke="#0d9488"
           strokeWidth="2"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -102,7 +102,7 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
             cx={point.x}
             cy={point.y}
             r="6"
-            fill="#c96442"
+            fill="#0d9488"
             stroke="white"
             strokeWidth="2"
             initial={{ opacity: 0, scale: 0 }}
@@ -131,7 +131,7 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
                       : 'end'
                 }
                 dominantBaseline={isTop ? 'auto' : 'hanging'}
-                className="text-xs font-medium fill-stone-700 dark:fill-stone-300"
+                className="text-xs font-medium fill-slate-700 dark:fill-slate-300"
               >
                 {dim[locale].name.split(' ').slice(0, 2).join(' ')}
               </text>
@@ -146,7 +146,7 @@ export function RadarChart({ scores, locale, size = 300, dimensions }: RadarChar
                       : 'end'
                 }
                 dominantBaseline="hanging"
-                className="text-[10px] fill-stone-500 dark:fill-stone-400"
+                className="text-[10px] fill-slate-500 dark:fill-slate-400"
               >
                 {scores[dim.id]?.toFixed(1) || '0.0'}
               </text>

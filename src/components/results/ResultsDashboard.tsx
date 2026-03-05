@@ -58,7 +58,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
   if (!dimensionScores || !overallScore || !maturityLevel) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-stone-500">
+        <p className="text-slate-500">
           {locale === 'sv' ? 'Laddar resultat...' : 'Loading results...'}
         </p>
       </div>
@@ -69,7 +69,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
   const dimCount = scope.dimensions.length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 to-orange-50 dark:from-stone-900 dark:to-stone-900/20 pt-4 pb-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-slate-900 dark:to-slate-900 pt-4 pb-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -77,10 +77,10 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
             {locale === 'sv' ? `Ert mognadsresultat` : `Your maturity results`}
           </h1>
-          <p className="text-stone-600 dark:text-stone-400">
+          <p className="text-slate-600 dark:text-slate-400">
             {locale === 'sv'
               ? `${scopeName} – bedömning baserad på ${dimCount} strategiska dimensioner`
               : `${scopeName} – assessment based on ${dimCount} strategic dimensions`}
@@ -94,9 +94,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 text-center">
               {locale === 'sv' ? 'Övergripande mognadsnivå' : 'Overall maturity level'}
             </h2>
             <MaturityGauge score={overallScore} locale={locale} maturityLevels={scope.maturityLevels} />
@@ -107,9 +107,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8"
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8"
           >
-            <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6 text-center">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 text-center">
               {locale === 'sv' ? 'Dimensionsanalys' : 'Dimension analysis'}
             </h2>
             <div className="flex justify-center">
@@ -123,9 +123,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
+          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
         >
-          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-2 text-center">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2 text-center">
             {locale === 'sv' ? 'Mognadsresan' : 'Maturity journey'}
           </h2>
           <MaturitySteps currentLevel={maturityLevel} locale={locale} maturityLevels={scope.maturityLevels} />
@@ -136,9 +136,9 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
+          className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 mb-12"
         >
-          <h2 className="text-xl font-semibold text-stone-900 dark:text-white mb-6">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
             {locale === 'sv' ? 'Dimensioner i detalj' : 'Dimensions in detail'}
           </h2>
           <DimensionBars scores={dimensionScores} locale={locale} dimensions={scope.dimensions} notApplicableCounts={notApplicableCounts || undefined} />
@@ -167,7 +167,7 @@ export function ResultsDashboard({ onReset }: ResultsDashboardProps) {
         >
           <button
             onClick={onReset}
-            className="flex items-center gap-2 px-6 py-3 bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-stone-200 rounded-lg hover:bg-stone-300 dark:hover:bg-stone-600 transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             {locale === 'sv' ? 'Gör om bedömningen' : 'Retake assessment'}

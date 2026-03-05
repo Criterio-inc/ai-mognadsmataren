@@ -30,10 +30,10 @@ export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugePr
   // Colors for each level segment
   const segmentColors = [
     '#ef4444', // Level 1 - Red
-    '#ea580c', // Level 2 - Deep Orange
-    '#d97706', // Level 3 - Amber
-    '#c96442', // Level 4 - Terracotta
-    '#65a30d', // Level 5 - Olive Green
+    '#f97316', // Level 2 - Orange
+    '#eab308', // Level 3 - Yellow
+    '#14b8a6', // Level 4 - Teal
+    '#22c55e', // Level 5 - Green
   ];
 
   // Gauge geometry - arc curves UPWARD (from left to right over the top)
@@ -93,7 +93,7 @@ export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugePr
                 y={y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                className="text-sm fill-stone-600 dark:fill-stone-400 font-bold"
+                className="text-sm fill-slate-600 dark:fill-slate-400 font-bold"
               >
                 {level}
               </text>
@@ -101,8 +101,8 @@ export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugePr
           })}
 
           {/* Center decoration */}
-          <circle cx={cx} cy={cy} r="10" fill="currentColor" className="text-stone-800 dark:text-stone-200" />
-          <circle cx={cx} cy={cy} r="6" fill="currentColor" className="text-stone-100 dark:text-stone-700" />
+          <circle cx={cx} cy={cy} r="10" fill="currentColor" className="text-slate-800 dark:text-slate-200" />
+          <circle cx={cx} cy={cy} r="6" fill="currentColor" className="text-slate-100 dark:text-slate-700" />
         </svg>
 
         {/* Animated needle */}
@@ -119,8 +119,8 @@ export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugePr
           animate={{ rotate: needleRotation }}
           transition={{ type: 'spring', stiffness: 60, damping: 15 }}
         >
-          <div className="w-full h-full bg-gradient-to-t from-stone-800 to-stone-600 dark:from-stone-200 dark:to-stone-400 rounded-full" />
-          <div className="absolute bottom-0 left-1/2 w-3 h-3 -ml-1.5 bg-stone-800 dark:bg-stone-200 rounded-full" />
+          <div className="w-full h-full bg-gradient-to-t from-slate-800 to-slate-600 dark:from-slate-200 dark:to-slate-400 rounded-full" />
+          <div className="absolute bottom-0 left-1/2 w-3 h-3 -ml-1.5 bg-slate-800 dark:bg-slate-200 rounded-full" />
         </motion.div>
       </div>
 
@@ -131,10 +131,10 @@ export function MaturityGauge({ score, locale, maturityLevels }: MaturityGaugePr
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <div className="text-5xl font-bold text-stone-900 dark:text-white">
+        <div className="text-5xl font-bold text-slate-900 dark:text-white">
           {score.toFixed(1)}
         </div>
-        <div className="text-lg text-stone-500 dark:text-stone-400">
+        <div className="text-lg text-slate-500 dark:text-slate-400">
           {locale === 'sv' ? 'av 5.0' : 'of 5.0'}
         </div>
       </motion.div>

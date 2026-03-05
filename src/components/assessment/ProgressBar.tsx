@@ -18,15 +18,15 @@ export function ProgressBar() {
     <div className="w-full max-w-2xl mx-auto mb-8">
       {/* Overall progress */}
       <div className="mb-4">
-        <div className="flex justify-between text-sm text-stone-600 dark:text-stone-400 mb-2">
+        <div className="flex justify-between text-sm text-slate-600 dark:text-slate-400 mb-2">
           <span>
             {locale === 'sv' ? 'Framsteg' : 'Progress'}
           </span>
           <span>{answeredCount}/{totalQuestions}</span>
         </div>
-        <div className="h-2 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
+        <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-amber-500 to-amber-600"
+            className="h-full bg-gradient-to-r from-teal-500 to-teal-600"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}
@@ -54,16 +54,16 @@ export function ProgressBar() {
                   isComplete
                     ? 'bg-green-500'
                     : dimProgress > 0
-                      ? 'bg-amber-500'
-                      : 'bg-stone-300 dark:bg-stone-600'
+                      ? 'bg-teal-500'
+                      : 'bg-slate-300 dark:bg-slate-600'
                 }`}
                 style={{
                   background: !isComplete && dimProgress > 0
-                    ? `linear-gradient(to right, #d97706 ${dimProgress}%, #d6d3d1 ${dimProgress}%)`
+                    ? `linear-gradient(to right, #0d9488 ${dimProgress}%, #cbd5e1 ${dimProgress}%)`
                     : undefined,
                 }}
               />
-              <p className="text-[10px] text-stone-500 dark:text-stone-400 mt-1 truncate text-center">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate text-center">
                 {dim[locale].name.split(' ')[0]}
               </p>
             </div>

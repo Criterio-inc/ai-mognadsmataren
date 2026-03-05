@@ -240,17 +240,17 @@ export function LandingPage({ onStart }: LandingPageProps) {
           {/* Report Preview Card */}
           <motion.div
             whileHover={{ scale: 1.01 }}
-            className="bg-gradient-to-br from-stone-900 to-stone-800 rounded-2xl p-8 shadow-2xl border border-stone-700 overflow-hidden relative"
+            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 shadow-2xl border border-slate-700 overflow-hidden relative"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-teal-500/20 to-transparent rounded-full blur-3xl" />
 
             <div className="relative grid md:grid-cols-2 gap-8">
               {/* Left side - Gauge and Score */}
               <div className="space-y-6">
-                <div className="bg-stone-800/50 rounded-xl p-6 backdrop-blur">
+                <div className="bg-slate-800/50 rounded-xl p-6 backdrop-blur">
                   <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp className="w-5 h-5 text-orange-400" />
-                    <span className="text-sm font-medium text-stone-300">
+                    <TrendingUp className="w-5 h-5 text-teal-400" />
+                    <span className="text-sm font-medium text-slate-300">
                       {locale === 'sv'
                         ? `Er ${currentScope.name[locale].toLowerCase()}snivå`
                         : `Your ${currentScope.name[locale].toLowerCase()} level`}
@@ -263,7 +263,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                       <path
                         d="M 20 100 A 80 80 0 0 1 180 100"
                         fill="none"
-                        stroke="#44403c"
+                        stroke="#334155"
                         strokeWidth="12"
                         strokeLinecap="round"
                       />
@@ -276,14 +276,14 @@ export function LandingPage({ onStart }: LandingPageProps) {
                       />
                       <defs>
                         <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#F5A623" />
-                          <stop offset="100%" stopColor="#c96442" />
+                          <stop offset="0%" stopColor="#14b8a6" />
+                          <stop offset="100%" stopColor="#0d9488" />
                         </linearGradient>
                       </defs>
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pt-4">
                       <span className="text-4xl font-bold text-white">3.8</span>
-                      <span className="text-xs text-stone-400">{locale === 'sv' ? 'av 5' : 'of 5'}</span>
+                      <span className="text-xs text-slate-400">{locale === 'sv' ? 'av 5' : 'of 5'}</span>
                     </div>
                   </div>
 
@@ -295,8 +295,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
                 </div>
 
                 {/* Dimension bars - dynamic per selected scope */}
-                <div className="bg-stone-800/50 rounded-xl p-6 backdrop-blur">
-                  <div className="text-sm font-medium text-stone-300 mb-4">
+                <div className="bg-slate-800/50 rounded-xl p-6 backdrop-blur">
+                  <div className="text-sm font-medium text-slate-300 mb-4">
                     {locale === 'sv' ? 'Resultat per dimension' : 'Results by dimension'}
                   </div>
                   <AnimatePresence mode="wait">
@@ -311,10 +311,10 @@ export function LandingPage({ onStart }: LandingPageProps) {
                       {previewDims.map((dim, i) => (
                         <div key={i}>
                           <div className="flex justify-between text-xs mb-1">
-                            <span className="text-stone-400">{dim[locale]}</span>
+                            <span className="text-slate-400">{dim[locale]}</span>
                             <span className="text-white font-medium">{dim.score}</span>
                           </div>
-                          <div className="h-2 bg-stone-700 rounded-full overflow-hidden">
+                          <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${(dim.score / 5) * 100}%` }}
@@ -330,10 +330,10 @@ export function LandingPage({ onStart }: LandingPageProps) {
               </div>
 
               {/* Right side - AI Insights */}
-              <div className="bg-stone-800/50 rounded-xl p-6 backdrop-blur h-fit">
+              <div className="bg-slate-800/50 rounded-xl p-6 backdrop-blur h-fit">
                 <div className="flex items-center gap-2 mb-4">
-                  <Sparkles className="w-5 h-5 text-orange-400" />
-                  <span className="text-sm font-medium text-stone-300">
+                  <Sparkles className="w-5 h-5 text-teal-400" />
+                  <span className="text-sm font-medium text-slate-300">
                     {locale === 'sv' ? 'AI-genererade insikter' : 'AI-generated insights'}
                   </span>
                 </div>
@@ -344,7 +344,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="space-y-4 text-sm text-stone-300"
+                    className="space-y-4 text-sm text-slate-300"
                   >
                     {[
                       { icon: '\u2713', iconColor: 'bg-emerald-500/20', textColor: 'text-emerald-400' },
@@ -367,8 +367,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="mt-6 pt-4 border-t border-stone-700">
-                  <p className="text-xs text-stone-500 italic">
+                <div className="mt-6 pt-4 border-t border-slate-700">
+                  <p className="text-xs text-slate-500 italic">
                     {locale === 'sv'
                       ? '* Exempelrapport \u2013 dina faktiska resultat baseras på dina svar'
                       : '* Example report \u2013 your actual results are based on your answers'}
@@ -523,25 +523,25 @@ export function LandingPage({ onStart }: LandingPageProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="mt-16 bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl p-8 text-center border border-stone-700"
+          className="mt-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 text-center border border-slate-700"
         >
-          <Users className="w-12 h-12 text-orange-400 mx-auto mb-4" />
+          <Users className="w-12 h-12 text-teal-400 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-white mb-2">
             {locale === 'sv' ? 'Vill ni mäta hela organisationens mognad?' : 'Want to assess your entire organization\'s maturity?'}
           </h3>
-          <p className="text-stone-300 mb-6 max-w-xl mx-auto">
+          <p className="text-slate-300 mb-6 max-w-xl mx-auto">
             {locale === 'sv'
               ? 'Få aggregerade resultat med flera svaranden, jämförelseanalys och professionell facilitering av er mognadsmätning.'
               : 'Get aggregated results with multiple respondents, comparative analysis and professional facilitation of your maturity assessment.'}
           </p>
           <a
             href="mailto:kontakt@criteroconsulting.se?subject=Mognadsmätning – förfrågan"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
           >
             <Mail className="w-5 h-5" />
             {locale === 'sv' ? 'Kontakta oss' : 'Contact us'}
           </a>
-          <p className="mt-4 text-sm text-stone-400">
+          <p className="mt-4 text-sm text-slate-400">
             kontakt@criteroconsulting.se
           </p>
         </motion.div>

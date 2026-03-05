@@ -65,18 +65,18 @@ export function QuestionCard({
     >
       {/* Dimension badge */}
       <div className="mb-4">
-        <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
+        <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300">
           {dimension?.[locale].name}
         </span>
       </div>
 
       {/* Question counter */}
-      <div className="text-sm text-stone-500 dark:text-stone-400 mb-2">
+      <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
         {locale === 'sv' ? 'Fråga' : 'Question'} {questionNumber} {locale === 'sv' ? 'av' : 'of'} {totalQuestions}
       </div>
 
       {/* Question text */}
-      <h2 className="text-xl md:text-2xl font-semibold text-stone-900 dark:text-white mb-8">
+      <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-8">
         {question[locale]}
       </h2>
 
@@ -90,16 +90,16 @@ export function QuestionCard({
             onClick={() => handleSelect(value)}
             className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
               currentValue === value
-                ? 'border-amber-600 bg-orange-50 dark:bg-orange-900/30'
-                : 'border-stone-200 dark:border-stone-700 hover:border-amber-400 dark:hover:border-amber-600'
+                ? 'border-teal-600 bg-teal-50 dark:bg-teal-900/30'
+                : 'border-slate-200 dark:border-slate-700 hover:border-teal-400 dark:hover:border-teal-600'
             }`}
           >
             <div className="flex items-center gap-4">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                   currentValue === value
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-stone-200 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
+                    ? 'bg-teal-600 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
                 }`}
               >
                 {value}
@@ -107,8 +107,8 @@ export function QuestionCard({
               <span
                 className={`text-sm md:text-base ${
                   currentValue === value
-                    ? 'text-amber-800 dark:text-amber-300 font-medium'
-                    : 'text-stone-700 dark:text-stone-300'
+                    ? 'text-teal-800 dark:text-teal-300 font-medium'
+                    : 'text-slate-700 dark:text-slate-300'
                 }`}
               >
                 {scaleLabels[locale][value - 1]}
@@ -118,23 +118,23 @@ export function QuestionCard({
         ))}
 
         {/* Not applicable option */}
-        <div className="pt-2 border-t border-stone-100 dark:border-stone-700/50">
+        <div className="pt-2 border-t border-slate-100 dark:border-slate-700/50">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect(0)}
             className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
               currentValue === 0
-                ? 'border-stone-500 bg-stone-100 dark:bg-stone-700/50'
-                : 'border-stone-200 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500'
+                ? 'border-slate-500 bg-slate-100 dark:bg-slate-700/50'
+                : 'border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
             }`}
           >
             <div className="flex items-center gap-4">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                   currentValue === 0
-                    ? 'bg-stone-500 text-white'
-                    : 'bg-stone-200 dark:bg-stone-700 text-stone-600 dark:text-stone-300'
+                    ? 'bg-slate-500 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
                 }`}
               >
                 –
@@ -142,8 +142,8 @@ export function QuestionCard({
               <span
                 className={`text-sm md:text-base ${
                   currentValue === 0
-                    ? 'text-stone-700 dark:text-stone-200 font-medium'
-                    : 'text-stone-500 dark:text-stone-400'
+                    ? 'text-slate-700 dark:text-slate-200 font-medium'
+                    : 'text-slate-500 dark:text-slate-400'
                 }`}
               >
                 {notApplicableLabel[locale]}
@@ -160,8 +160,8 @@ export function QuestionCard({
           disabled={isFirst}
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
             isFirst
-              ? 'bg-stone-100 text-stone-400 cursor-not-allowed dark:bg-stone-800'
-              : 'bg-stone-200 text-stone-700 hover:bg-stone-300 dark:bg-stone-700 dark:text-stone-200 dark:hover:bg-stone-600'
+              ? 'bg-slate-100 text-slate-400 cursor-not-allowed dark:bg-slate-800'
+              : 'bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600'
           }`}
         >
           {locale === 'sv' ? '← Föregående' : '← Previous'}
@@ -172,7 +172,7 @@ export function QuestionCard({
           disabled={currentValue == null}
           className={`px-6 py-3 rounded-lg font-medium transition-all ${
             currentValue == null
-              ? 'bg-stone-100 text-stone-400 cursor-not-allowed dark:bg-stone-800'
+              ? 'bg-slate-100 text-slate-400 cursor-not-allowed dark:bg-slate-800'
               : 'bg-primary text-white hover:opacity-90'
           }`}
         >

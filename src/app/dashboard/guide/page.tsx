@@ -12,13 +12,13 @@ export default function GuidePage() {
     <div className="max-w-4xl mx-auto">
       <Link
         href="/dashboard"
-        className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200 mb-6"
+        className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         Tillbaka till projekt
       </Link>
 
-      <div className="bg-white dark:bg-stone-800 rounded-xl border border-stone-200 dark:border-stone-700 p-8 md:p-12">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 md:p-12">
         <GuideContent markdown={markdown} />
       </div>
     </div>
