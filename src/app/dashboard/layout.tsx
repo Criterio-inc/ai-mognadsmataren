@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import { SignOutButton } from './SignOutButton';
+import { ForceDarkMode } from '@/components/ui/ForceDarkMode';
 
 export default async function DashboardLayout({
   children,
@@ -20,13 +21,14 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <ForceDarkMode />
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
               <Link href="/dashboard" className="text-lg font-bold" style={{ color: '#0f766e' }}>
-                AI-Mognadsmätaren
+                Mognadsmätaren
               </Link>
               <nav className="hidden md:flex items-center gap-6">
                 <Link
