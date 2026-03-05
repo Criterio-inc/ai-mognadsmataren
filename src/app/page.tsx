@@ -7,7 +7,6 @@ import { LandingPage } from '@/components/landing/LandingPage';
 import { Assessment } from '@/components/assessment/Assessment';
 import { ResultsDashboard } from '@/components/results/ResultsDashboard';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAssessmentStore, useResultsStore } from '@/lib/store';
 import { getTranslations } from '@/lib/translations';
 import type { ScopeId } from '@/lib/scopes';
@@ -78,9 +77,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* Right side - Theme and Language toggles */}
+        {/* Right side - Language toggle */}
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <LanguageSwitcher />
         </div>
       </header>

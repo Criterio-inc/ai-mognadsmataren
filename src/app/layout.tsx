@@ -37,8 +37,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           {children}
