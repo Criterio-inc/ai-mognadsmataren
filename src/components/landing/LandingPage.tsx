@@ -188,7 +188,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
               onClick={() => document.getElementById('scope-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="inline-flex items-center gap-2 px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white text-lg font-semibold rounded-xl shadow-lg shadow-teal-900/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
             >
-              {locale === 'sv' ? 'Provsmaka mätningen' : 'Try the assessment'}
+              {locale === 'sv' ? 'Testa själv' : 'Try the assessment'}
               <ArrowRight className="w-5 h-5" />
             </button>
             <a
@@ -610,7 +610,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
             </h2>
             <p className="text-lg text-muted-foreground max-w-lg mx-auto">
               {locale === 'sv'
-                ? 'Provsmaka mätningen individuellt. Ingen inloggning krävs.'
+                ? 'Prova mätningen individuellt. Ingen inloggning krävs.'
                 : 'Try the assessment individually. No login required.'}
             </p>
           </motion.div>
@@ -682,13 +682,13 @@ export function LandingPage({ onStart }: LandingPageProps) {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 {locale === 'sv'
-                  ? 'Från provsmakning till organisationsmätning'
-                  : 'From tasting to organizational assessment'}
+                  ? 'Från individuellt test till organisationsmätning'
+                  : 'From individual test to organizational assessment'}
               </h2>
               <p className="text-slate-300 mb-6 text-lg leading-relaxed">
                 {locale === 'sv'
-                  ? 'Det du gör här är en individuell provsmakning. Den verkliga kraften uppstår när hela ledningsgruppen genomför mätningen.'
-                  : 'What you do here is an individual tasting. The real power comes when the entire leadership team completes the assessment.'}
+                  ? 'Det du gör här är ett individuellt test. Den verkliga kraften uppstår när hela ledningsgruppen genomför mätningen.'
+                  : 'What you do here is an individual test. The real power comes when the entire leadership team completes the assessment.'}
               </p>
               <ul className="space-y-3 mb-8">
                 {(locale === 'sv'
