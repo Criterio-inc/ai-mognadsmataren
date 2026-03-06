@@ -111,15 +111,11 @@ export function LandingPage({ onStart }: LandingPageProps) {
       {/* HERO - Full viewport with background image   */}
       {/* ============================================ */}
       <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
+        {/* Background image with parallax (fixed) effect */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2000&q=80)' }}
+        >
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/90" />
         </div>
@@ -218,27 +214,39 @@ export function LandingPage({ onStart }: LandingPageProps) {
       </section>
 
       {/* ============================================ */}
-      {/* WHY MATURITY MATTERS - Numbered cards        */}
+      {/* WHY MATURITY MATTERS - Narrative + cards      */}
       {/* ============================================ */}
       <section className="py-24 bg-background">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="max-w-3xl mx-auto mb-20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
               {locale === 'sv'
-                ? 'Varför mognad avgör förflyttningen'
-                : 'Why maturity determines the transformation'}
+                ? 'Varför är ledningens mognad så viktig vid digital utveckling?'
+                : 'Why is leadership maturity so critical for digital development?'}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {locale === 'sv'
-                ? 'Det räcker inte med ambitioner och teknik. Utan dessa förutsättningar blir digital förflyttning en kostnad utan resultat.'
-                : 'Ambitions and technology are not enough. Without these prerequisites, digital transformation becomes a cost without results.'}
-            </p>
+            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                {locale === 'sv'
+                  ? 'Både forskning och egen erfarenhet visar att närmare 70 % av alla digitala utvecklingsinitiativ, inklusive AI, misslyckas — och orsaken är ofta ledningens oförmåga att leda, styra, samordna och följa upp.'
+                  : 'Both research and our own experience show that nearly 70% of all digital development initiatives, including AI, fail — and the root cause is often leadership\'s inability to lead, govern, coordinate and follow up.'}
+              </p>
+              <p>
+                {locale === 'sv'
+                  ? 'Om du vill öka er organisations möjligheter att leda digital utveckling är det bra att känna till förutsättningarna. En mätning av ledningens och organisationens mognad för digital utveckling eller AI-utveckling ger en gemensam bild av utgångsläget, rekommendationer om vad som behöver göras och satsas på inledningsvis, och pekar ut rätt riktning för er organisation — givet era utmaningar och förutsättningar.'
+                  : 'If you want to increase your organization\'s ability to lead digital development, it helps to understand the prerequisites. An assessment of leadership and organizational maturity for digital or AI development provides a shared picture of your starting point, recommendations for what to prioritize initially, and points your organization in the right direction — given your challenges and conditions.'}
+              </p>
+              <p className="text-foreground font-medium">
+                {locale === 'sv'
+                  ? 'Du kan prova vårt verktyg redan idag — och om du vill få verklig förändringskraft, kontakta oss för en dialog om hur vi kan stötta er på er digitala utvecklingsresa.'
+                  : 'You can try our tool today — and if you want real transformational power, contact us to discuss how we can support you on your digital development journey.'}
+              </p>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-6">
@@ -660,14 +668,11 @@ export function LandingPage({ onStart }: LandingPageProps) {
       {/* FROM INDIVIDUAL TO ORGANIZATION              */}
       {/* ============================================ */}
       <section className="relative py-24 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            fill
-            className="object-cover"
-          />
+        {/* Background image with parallax effect */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2000&q=80)' }}
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/80" />
         </div>
 
