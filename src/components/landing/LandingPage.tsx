@@ -159,8 +159,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
             className="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-4 font-light leading-relaxed"
           >
             {locale === 'sv'
-              ? 'Hur redo är er ledningsgrupp att leda den digitala förflyttningen?'
-              : 'How ready is your leadership team to lead the digital transformation?'}
+              ? 'Mät er ledningsgrupps mognad för digital utveckling och AI'
+              : 'Measure your leadership team\'s maturity for digital development and AI'}
           </motion.p>
 
           <motion.p
@@ -170,8 +170,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
             className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-10"
           >
             {locale === 'sv'
-              ? 'Kartlägg nuläget inom AI-mognad och digital mognad. Resultatet ger en tydlig bild av styrkor, luckor och var ni bör börja.'
-              : 'Map your current state in AI maturity and digital maturity. The results give a clear picture of strengths, gaps and where to begin.'}
+              ? 'Få en tydlig bild av styrkor och utvecklingsområden. Resultatet ger konkreta rekommendationer om var ni bör börja.'
+              : 'Get a clear picture of strengths and areas for development. The results provide concrete recommendations on where to begin.'}
           </motion.p>
 
           <motion.div
@@ -233,18 +233,18 @@ export function LandingPage({ onStart }: LandingPageProps) {
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
                 {locale === 'sv'
-                  ? 'Både forskning och egen erfarenhet visar att närmare 70 % av alla digitala utvecklingsinitiativ, inklusive AI, misslyckas — och orsaken är ofta ledningens oförmåga att leda, styra, samordna och följa upp.'
-                  : 'Both research and our own experience show that nearly 70% of all digital development initiatives, including AI, fail — and the root cause is often leadership\'s inability to lead, govern, coordinate and follow up.'}
+                  ? 'Både forskning och egen erfarenhet visar att närmare 70 % av alla digitala utvecklingsinitiativ, inklusive AI, misslyckas. Orsaken är ofta ledningens oförmåga att leda, styra, samordna och följa upp.'
+                  : 'Both research and our own experience show that nearly 70% of all digital development initiatives, including AI, fail. The root cause is often leadership\'s inability to lead, govern, coordinate and follow up.'}
               </p>
               <p>
                 {locale === 'sv'
-                  ? 'Om du vill öka er organisations möjligheter att leda digital utveckling är det bra att känna till förutsättningarna. En mätning av ledningens och organisationens mognad för digital utveckling eller AI-utveckling ger en gemensam bild av utgångsläget, rekommendationer om vad som behöver göras och satsas på inledningsvis, och pekar ut rätt riktning för er organisation — givet era utmaningar och förutsättningar.'
-                  : 'If you want to increase your organization\'s ability to lead digital development, it helps to understand the prerequisites. An assessment of leadership and organizational maturity for digital or AI development provides a shared picture of your starting point, recommendations for what to prioritize initially, and points your organization in the right direction — given your challenges and conditions.'}
+                  ? 'Om du vill öka er organisations möjligheter att leda digital utveckling är det bra att känna till förutsättningarna. En mätning av ledningens och organisationens mognad för digital utveckling eller AI-utveckling ger en gemensam bild av utgångsläget, rekommendationer om vad som behöver göras och satsas på inledningsvis, och pekar ut rätt riktning för er organisation, givet era utmaningar och förutsättningar.'
+                  : 'If you want to increase your organization\'s ability to lead digital development, it helps to understand the prerequisites. An assessment of leadership and organizational maturity for digital or AI development provides a shared picture of your starting point, recommendations for what to prioritize initially, and points your organization in the right direction given your challenges and conditions.'}
               </p>
               <p className="text-foreground font-medium">
                 {locale === 'sv'
-                  ? 'Du kan prova vårt verktyg redan idag — och om du vill få verklig förändringskraft, kontakta oss för en dialog om hur vi kan stötta er på er digitala utvecklingsresa.'
-                  : 'You can try our tool today — and if you want real transformational power, contact us to discuss how we can support you on your digital development journey.'}
+                  ? 'Du kan prova vårt verktyg redan idag. Om du vill få verklig förändringskraft, kontakta oss för en dialog om hur vi kan stötta er på er digitala utvecklingsresa.'
+                  : 'You can try our tool today. If you want real transformational power, contact us to discuss how we can support you on your digital development journey.'}
               </p>
             </div>
           </motion.div>
@@ -266,8 +266,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
               {
                 num: '03.',
                 icon: Users,
-                sv: { title: 'Kultur & kompetens', desc: 'Finns förmågan och viljan att experimentera och lära? Tekniken utvecklas snabbt — organisationen måste hänga med.' },
-                en: { title: 'Culture & competence', desc: 'Is there the ability and willingness to experiment and learn? Technology moves fast — the organization must keep up.' },
+                sv: { title: 'Kultur & kompetens', desc: 'Finns förmågan och viljan att experimentera och lära? Tekniken utvecklas snabbt och organisationen måste hänga med.' },
+                en: { title: 'Culture & competence', desc: 'Is there the ability and willingness to experiment and learn? Technology moves fast and the organization must keep up.' },
               },
               {
                 num: '04.',
@@ -733,8 +733,8 @@ export function LandingPage({ onStart }: LandingPageProps) {
                 </h3>
                 <p className="text-slate-400 text-sm mb-6">
                   {locale === 'sv'
-                    ? 'Vi hjälper er genom hela processen — från mätning till handlingsplan.'
-                    : 'We help you through the entire process — from assessment to action plan.'}
+                    ? 'Vi hjälper er genom hela processen, från mätning till handlingsplan.'
+                    : 'We help you through the entire process, from assessment to action plan.'}
                 </p>
                 <a
                   href="mailto:kontakt@criteroconsulting.se?subject=Mognadsmätning – intresseanmälan"
